@@ -26,6 +26,36 @@ Blockers: <none | ...>
 
 ---
 
+### 2026-07-15 — Phase-0 feasibility: novelty check + data recon complete — Phase 0
+Done: (1) researcher novelty check → `docs/novelty_memo.md`, `docs/references.md`, D-010 appended.
+(2) data-engineer recon → `docs/recon_report.md`, `src/recon/` (re-runnable, seeded),
+`data/recon_manifest.json`, run `recon-2026-07-15` logged in EXPERIMENTS.md.
+Findings/decisions: Novelty verdict **INCREMENTAL** (D-010): RQ1 is replication+extension; the
+differentiating combination is AI-progress domain + encompassing framing + C ≤ T + dataset
+release; closest work is AIA Forecaster (arXiv 2511.07678, forecast-combination not encompassing).
+Recon: **Metaculus API now requires auth (HTTP 403)** — zero Metaculus data this phase; Manifold
+alone yields 3,728 resolved binary AI-progress questions (keyword filter v1.0, precision ~85%).
+Snapshot-feasible clean N: 2,886 (2022-01 cutoff) → 2,709 (2023-10) → 1,183 (2025-01) → 1,004
+(2025-04). RQ4 liquidity viable: 54.7% of markets ≥20 bettors and ≥1,000 mana volume. Seeded
+power sketch (seed 42): 80% power at N=200–400 for ρ ≤ 0.75, N≈1,000 at ρ = 0.9 → RQ3
+provisionally **CONFIRMATORY**; D-008 exploratory fallback stays armed until empirical ρ is
+measured (pilot blocked — no API keys).
+Cost this session: USD 0.00 (no LLM calls; see run `recon-2026-07-15`).
+Broke / changed: DATA.md's "key-less Metaculus API" assumption no longer holds (policy change);
+needs `METACULUS_API_TOKEN` in `.env` or a Manifold-only v1. Pilot elicitation (DATA.md recon
+item 5) blocked by missing `.env`; substituted a simulation-based power grid, clearly labeled.
+Process note: data-engineer subagent committed its own work (b903b0f) — contents verified clean
+(no raw data, no secrets), but per HANDOFF the orchestrator commits; future dispatches will say so
+explicitly.
+Gate status: Phase-0 feasibility — deliverables complete, **PENDING human sign-off**.
+Orchestrator's read: pass — novelty defensible (incremental, honestly positioned), N ample,
+RQ4 viable; RQ3 confirmatory label is robust to the known haircuts (precision ~85%, snapshot
+heuristic −5–15%) at ρ ≤ 0.75, marginal only for the newest cutoff if ρ ≈ 0.9.
+Next action: Human gate decisions: (1) accept Manifold as v1 primary source vs. provision
+`METACULUS_API_TOKEN` and re-run recon; (2) lock the ~3-model panel (log as D-011); (3) provide
+LLM API keys in `.env` so Phase 1 can run the pilot ρ estimate + thin slice.
+Blockers: `.env` keys (LLM API required for Phase 1; Metaculus token optional) — user-provided.
+
 ### 2026-07-15 — v1 scope locked; design decisions integrated — Phase 0
 Done: Full-repo read + design discussion with the human. Locked the v1 scope and the workflow;
 integrated decisions into SCOPE.md, DATA.md, HANDOFF.md, README.md and recorded D-005..D-009.

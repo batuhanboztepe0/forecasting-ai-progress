@@ -104,5 +104,29 @@ Reasoning: Avoids a premature lock; lets feasibility data drive the choice, per 
 Consequences: Panel and primary source are provisional until the recon report; log the final choice
 as a follow-up note here.
 
-<!-- Add D-010+ as the project makes further decisions (final panel/source after recon, any
+<!-- Add D-011+ as the project makes further decisions (final panel/source after recon, any
      post-freeze hypothesis change, metric/analysis choices). -->
+
+### D-010 — Phase-0 novelty verdict   (status: accepted)   2026-07-15
+Context: D-003 requires a passing novelty check before any heavy build. The contribution (D-001)
+claims novelty on four axes: (a) AI-progress domain restriction, (b) forecast-encompassing test
+between market and LLM forecasts (RQ3), (c) C ≤ T snapshot-aware contamination rule (D-006),
+(d) released curated AI-progress dataset with crowd snapshots.
+Decision: Verdict is **INCREMENTAL**. The project proceeds. Calibration (RQ1) is replication
+and extension in a decision-relevant domain. The encompassing framing + C ≤ T rule + AI-progress
+restriction + dataset release is the differentiating combination; no single existing paper
+delivers all four. Full search, closest works, and reasoning are in `docs/novelty_memo.md`.
+Closest works:
+- Halawi et al., NeurIPS 2024 (arXiv 2402.18563) — general-domain LLM vs. crowd accuracy, post-cutoff filter, no encompassing
+- Schoenegger et al., Science Advances 2024 (arXiv 2402.19379) — 12-LLM ensemble vs. 925-human crowd, no contamination control, no encompassing
+- Karger et al. / ForecastBench, ICLR 2025 (arXiv 2409.19839) — prospective contamination-free benchmark, no domain stratification, no encompassing
+- Alur et al. / AIA Forecaster, arXiv 2511.07678 (2025) — simplex regression on LLM + market across all domains; closest to RQ3 but uses forecast-combination framing, not encompassing, and no AI-progress domain or C ≤ T rule
+- Zou et al. / Autocast, NeurIPS 2022 (arXiv 2206.15474) — foundational LM forecasting benchmark
+Reasoning: None of the above apply all four differentiators simultaneously. The AIA Forecaster is
+the nearest competitor for RQ3 but differs in statistical framing (combination vs. encompassing)
+and domain. The field is active; a domain-specific encompassing paper could appear before
+publication — monitor continuously.
+Consequences: Report positions RQ1 as replication+extension in the AI-progress domain; RQ3
+(encompassing) and the dataset artifact are the primary contributions. Exploratory fallback for
+RQ3 pre-committed per D-008 if N is insufficient. Phase-0 data recon proceeds as the next
+blocking gate.
