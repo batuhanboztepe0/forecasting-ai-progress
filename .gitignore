@@ -1,0 +1,51 @@
+# --- Secrets (NEVER commit) ---
+.env
+.env.*
+*.key
+*.pem
+secrets/
+config.local.*
+
+# --- Personal source (kept local, never published) ---
+docs/thesis.*
+docs/thesis/
+
+# --- Data ---
+# Raw & intermediate data are NOT committed; provenance lives in DATA.md / manifests.
+# Curated release artifacts live in data/release/ and ARE committed.
+data/raw/
+data/interim/
+data/cache/
+.cache/
+llm_cache/
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+dist/
+build/
+
+# --- Notebooks ---
+.ipynb_checkpoints/
+
+# --- LaTeX build (keep sources + final PDF as you prefer) ---
+paper/*.aux
+paper/*.log
+paper/*.out
+paper/*.bbl
+paper/*.blg
+paper/*.toc
+paper/*.synctex.gz
+
+# --- OS / editor ---
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.log
