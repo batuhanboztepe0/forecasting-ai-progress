@@ -104,8 +104,8 @@ Reasoning: Avoids a premature lock; lets feasibility data drive the choice, per 
 Consequences: Panel and primary source are provisional until the recon report; log the final choice
 as a follow-up note here.
 
-<!-- Add D-011+ as the project makes further decisions (final panel/source after recon, any
-     post-freeze hypothesis change, metric/analysis choices). -->
+<!-- Add D-012+ as the project makes further decisions (any post-freeze hypothesis change,
+     metric/analysis choices). -->
 
 ### D-010 — Phase-0 novelty verdict   (status: accepted)   2026-07-15
 Context: D-003 requires a passing novelty check before any heavy build. The contribution (D-001)
@@ -130,3 +130,44 @@ Consequences: Report positions RQ1 as replication+extension in the AI-progress d
 (encompassing) and the dataset artifact are the primary contributions. Exploratory fallback for
 RQ3 pre-committed per D-008 if N is insufficient. Phase-0 data recon proceeds as the next
 blocking gate.
+
+### D-011 — Phase-0 gate PASSED; v1 source, panel, cutoffs, elicitation plan, budget   (status: accepted; resolves D-009's open items)   2026-07-16
+Context: Recon v1.1 (docs/recon_report.md): Manifold yields 3,728 usable resolved binary
+AI-progress questions; Metaculus API returns 142 questions but resolution=null (outcomes
+inaccessible as of 2026-07-16). Empirical pilot market–model correlation ρ̂ = 0.57 (n=30).
+Only an Anthropic API key is provisioned (human decision: no OpenAI). Servable Anthropic
+models with documented training cutoffs: claude-haiku-4-5 (Jul 2025); claude-sonnet-5,
+claude-opus-4-8, claude-fable-5 (Jan 2026). Verified pricing per MTok (in/out): haiku $1/$5,
+sonnet-5 $2/$10 intro ($3/$15 after 2026-08-31), opus-4-8 $5/$25, fable-5 $10/$50; Batch API
+−50%. Fable-5's thinking cannot be disabled and bills as output tokens. Human gate sign-off
+2026-07-16.
+Decision:
+1. **Source:** v1 uses Manifold only. Metaculus deferred to future work unless its resolution
+   endpoint becomes usable (N=142 is marginal regardless). Polymarket (real-money) noted as a
+   future-work upgrade for RQ4 — not in v1 (unrecon'd source, deadline-boxed sprint).
+2. **Cutoff basis:** TRAINING-data cutoff, end-of-month, conservative (per D-006 intent):
+   haiku-4-5 C = 2025-07-31; sonnet-5 / opus-4-8 C = 2026-01-31. Named constants in config.
+3. **Panel (~3 models, D-009):** claude-haiku-4-5-20251001, claude-sonnet-5, claude-opus-4-8 —
+   small/mid/frontier spread, all with documented cutoffs. Fable-5 is EXCLUDED from the core
+   panel on cost grounds (always-on billed thinking; would dominate the whole budget); optional
+   post-MVP "frontier probe" on the 175-question clean shared set (~$5–10 batched) if time and
+   budget allow.
+4. **Elicitation set:** the haiku-clean snapshot-feasible set (resolved_at ≥ 2025-08-30,
+   N≈791) plus a seeded pre-cutoff memorization-probe sample (~800, resolved < 2025-08-30).
+   All three models answer all questions; each model's pre/post split is computed against its
+   own training cutoff. Repeats: 1 per (question, model); a 3× variance probe on a seeded
+   100-question subset (sonnet-5) quantifies sampling variance, since temperature is not
+   accepted on the newest models (determinism rests on response caching).
+5. **RQ3 status (D-008):** CONFIRMATORY on the haiku-cutoff clean sample (N≈791, power ≈100%
+   at ρ̂=0.57); EXPLORATORY for the Jan-2026-cutoff models (N=175, ~70–75% power). The report
+   must label each accordingly.
+6. **Budget envelope:** core plan ≈ USD 8–15 with batching+caching (classifier ~$1–2, three-model
+   elicitation ~$6–8, probes/contingency ~$3–5); optional fable probe +~$10. Guardrails
+   unchanged: escalate if any single run projects > $25; full study target ≤ $35.
+Reasoning: Manifold is the only source with accessible outcomes; training cutoff is the only
+defensible C under D-006; opus-4-8 delivers frontier capability at half fable-5's token price
+with controllable thinking, keeping the study reproducible and in budget; the shared question
+set maximizes RQ2's per-model pre/post contrast at fixed cost.
+Consequences: Single-provider panel with only two distinct cutoffs — a stated limitation (RQ2
+capability-recency spread is narrow; no cross-provider generalization claim). Play-money-only
+RQ4 caveat stands; Polymarket and a multi-provider panel are explicit future work.

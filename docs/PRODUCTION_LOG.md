@@ -26,6 +26,27 @@ Blockers: <none | ...>
 
 ---
 
+### 2026-07-16 — Phase-0 gate PASSED (human sign-off); D-011 locked; Phase 1 started — Phase 0→1
+Done: Human signed off on the feasibility gate and delegated the budget-driven panel decision.
+Logged D-011 (source = Manifold-only; TRAINING cutoffs 2025-07-31 / 2026-01-31; panel =
+haiku-4-5 + sonnet-5 + opus-4-8; fable-5 excluded from core on cost — always-on billed thinking
+at $10/$50 per MTok — optional post-MVP frontier probe; elicitation set ≈791 clean + ≈800
+pre-cutoff probe, 1 repeat + 3× variance probe; budget envelope ~$8–15 core). Ticked Phase 0 in
+SCOPE and updated §8 recon-dependent items to reference D-011. Added the planned-budget table to
+EXPERIMENTS.md. Verified current model pricing from the claude-api reference (not memory).
+Findings/decisions: D-011. Polymarket raised by the human — assessed as a genuine future-work
+upgrade for a real-money RQ4, not v1 (unrecon'd source; deadline-boxed sprint; recorded in D-011).
+No OpenAI key by human decision → single-provider panel is a stated limitation (two distinct
+cutoffs only).
+Cost this session: USD 0 so far today beyond the $0.054 total (no new LLM runs at log time).
+Broke / changed: nothing broke; D-009's open items resolved by D-011.
+Gate status: Phase-0 feasibility — **PASSED** (human sign-off 2026-07-16). Phase-1 MVP gate open.
+Next action: data-engineer thin slice (dispatched): ~50 seeded questions spanning pre/post
+cutoff × 3 panel models, crowd prob at T, cached elicitation, forecasts table → then
+quant-analyst scores it (Brier vs crowd + one calibration figure) → MVP gate check
+(reproducible, cost logged, numbers sane) → human sign-off.
+Blockers: none.
+
 ### 2026-07-16 — Recon v1.1: Metaculus with token + empirical pilot ρ — Phase 0
 Done: Human provisioned `.env` (METACULUS_API_TOKEN, ANTHROPIC_API_KEY). data-engineer re-run:
 (1) Metaculus pulled with auth via `/api/posts/` — 142 AI-progress binary questions found, but

@@ -1,8 +1,8 @@
 # SCOPE.md — pre-registered research design
 
-**Status:** Phase 0 (feasibility) — pre-registration; v1 design locked (see `docs/DECISIONS.md`
-D-005..D-009). Freeze this file before Phase 2 data collection; changes after freeze must be
-logged in `docs/DECISIONS.md`.
+**Status:** Phase 1 (MVP) — Phase 0 feasibility gate PASSED 2026-07-16 (see `docs/DECISIONS.md`
+D-010 novelty verdict, D-011 source/panel/budget). Freeze this file before Phase 2 data
+collection; changes after freeze must be logged in `docs/DECISIONS.md`.
 
 ## 1. Motivation
 
@@ -104,7 +104,7 @@ CIs and do not stake the project's value on which way they fall.
 
 ## 7. Phase checklist (update in place)
 
-- [ ] Phase 0 — feasibility (novelty verdict + data recon) — **blocking**
+- [x] Phase 0 — feasibility (novelty verdict + data recon) — **blocking** — PASSED 2026-07-16 (D-010, D-011)
 - [ ] Phase 1 — MVP end-to-end thin slice
 - [ ] Phase 2 — full data + scoring core (tested)
 - [ ] Phase 3 — RQ1–RQ4 analyses + red-team
@@ -116,9 +116,10 @@ CIs and do not stake the project's value on which way they fall.
   robustness is future work.
 - **Contamination rule:** **C ≤ T** — model cutoff at or before the snapshot, stricter than
   "resolved after cutoff", to close the information-recency leak (D-006).
-- **Model panel:** ~3 models with published cutoffs spanning capability, batched + cached,
-  cost-bounded; exact list set after recon (older cutoffs give more post-cutoff N) (D-009).
-- **Source mix:** both Metaculus and Manifold queried in recon; the clean post-cutoff N (and RQ4
-  liquidity) decides the primary (D-009).
-- **Elicitation repeats:** set in Phase 0 from a cost/variance sketch (small, e.g. 3–5).
+- **Model panel:** claude-haiku-4-5 (training cutoff 2025-07-31), claude-sonnet-5 and
+  claude-opus-4-8 (training cutoff 2026-01-31), batched + cached, cost-bounded (D-011).
+- **Source mix:** v1 primary source is Manifold; Metaculus deferred (its API exposes no
+  resolutions as of 2026-07-16) (D-011).
+- **Elicitation repeats:** 1 per (question, model); 3× variance probe on a seeded 100-question
+  subset (D-011).
 - **Ambiguous/annulled resolutions:** dropped, count logged (per `DATA.md`).

@@ -35,6 +35,22 @@ Notes:
 - pilot-elicitation haiku: temperature=0 (supported); 30 cache hits on second pass counted as 0 tokens
 - pilot-elicitation sonnet-5: temperature omitted (deprecated for this model, HTTP 400); responses cached in data/llm_cache/ (git-ignored)
 
+## Planned v1 budget (D-011; estimate — reconcile against the ledger as runs land)
+
+| item | calls (est.) | model | est. USD (batched) |
+|---|---|---|---|
+| Phase 1 thin slice (~50 q × 3 models) | ~150 | panel | ~0.30 (no batch — latency) |
+| Phase 2 LLM-assist classifier (~5,700 candidates) | ~5,700 | haiku-4-5 | ~1.1–2.3 |
+| Phase 2 elicitation (~1,600 q) | 1,600 | haiku-4-5 | ~0.7–1.4 |
+| Phase 2 elicitation (~1,600 q) | 1,600 | sonnet-5 (intro pricing) | ~1.4–2.9 |
+| Phase 2 elicitation (~1,600 q) | 1,600 | opus-4-8 | ~3.6–7.2 |
+| Variance probe (100 q × 3 repeats) | 300 | sonnet-5 | ~0.3–0.6 |
+| Contingency (retries, parse failures, prompt iteration) | — | — | ~3–5 |
+| **Core total** | | | **~8–15** |
+| Optional fable-5 frontier probe (~475 q, always-on thinking) | ~475 | fable-5 | ~10 (only if time/budget allow) |
+
+Guardrails unchanged: escalate if a single run projects > USD 25; full study ≤ USD 35.
+
 ## Notes
 
 - Cost = actual billed, not estimated, once known. Estimate first, reconcile after.
