@@ -26,6 +26,32 @@ Blockers: <none | ...>
 
 ---
 
+### 2026-07-16 — Phase-1 MVP thin slice complete; gate pending sign-off — Phase 1
+Done: Full end-to-end thin slice. data-engineer: 50 seeded questions (25 post-/25 pre-cutoff,
+15 clean for all three models) × 3 panel models → 150/150 elicitations (0 parse errors, 0
+refusals), crowd_prob_at_T for all 50, protocol v1 frozen in `src/mvp/mvp_config.py`, offline
+re-run bit-identical from cache, provenance in `data/mvp_manifest.json`. quant-analyst:
+`src/analysis/score_mvp.py` (known-input self-test PASS; SHA-256-identical outputs across runs)
+→ `data/interim/mvp_scores.csv`, `docs/figures/mvp_calibration.png`, `docs/mvp_results.md`.
+Findings/decisions: Crowd Brier 0.086 (BSS +0.62); sonnet-5 0.121 (+0.46); opus-4-8 0.115
+(+0.49); haiku 0.257 (BSS −0.15, i.e. worse than base rate). Orchestrator audited the haiku
+anomaly against raw cached responses: NOT a parse artifact — haiku genuinely emits a small set
+of canonical probabilities (0.15×16, 0.72×16, 0.92×8 out of 50). Elicitation-design/model
+limitation; informative for RQ2 but degrades haiku's calibration measurements. All descriptive,
+n=50, no claims (per docs/mvp_results.md).
+Cost this session: mvp-thin-slice $0.1032; scoring $0.00. Running total USD 0.1572.
+Broke / changed: `python3` on this machine is 3.14 without matplotlib; scoring runs under
+python3.11 (Homebrew) — documented in the script; clean-checkout repro must note the matplotlib
+dependency. No other breakage.
+Gate status: Phase-1 MVP — reproducible ✓, cost logged ✓, numbers sane ✓ (one flagged,
+root-caused anomaly). **PENDING human sign-off**, with one pre-Phase-2 decision attached:
+elicitation protocol v1 (bare JSON ask) vs v2 (brief reasoning before the JSON, applied to ALL
+models identically, decided now — before full-scale data — to avoid post-hoc tuning; would be
+logged as D-012 and re-run on the 50-question slice first).
+Next action: Human sign-off on MVP gate + protocol v1-vs-v2 decision → Phase 2 (full collection,
+LLM classifier, batched elicitation at target N, scoring core with unit tests).
+Blockers: none.
+
 ### 2026-07-16 — Phase-0 gate PASSED (human sign-off); D-011 locked; Phase 1 started — Phase 0→1
 Done: Human signed off on the feasibility gate and delegated the budget-driven panel decision.
 Logged D-011 (source = Manifold-only; TRAINING cutoffs 2025-07-31 / 2026-01-31; panel =
