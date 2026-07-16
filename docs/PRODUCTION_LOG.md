@@ -26,6 +26,27 @@ Blockers: <none | ...>
 
 ---
 
+### 2026-07-16 — Phase-1 gate PASSED; protocol v2 locked (D-012); Phase 2 open — Phase 1→2
+Done: Fresh orchestrator resumed per HANDOFF (six state files read, state echoed, repo verified
+against handoff commit 36c6e8c). Before the A/B ask, researcher ran a targeted literature check
+verified against the papers: ForecastBench (2409.19839) directly tests scratchpad vs. zero-shot
+elicitation and scratchpad wins consistently; Halawi (2402.18563) and Schoenegger (2402.19379)
+both elicit reasoning-first with no bare-ask control; caveat — avoid explicit Bayesian-framing
+instructions (2506.01578). Human signed off the MVP gate (PASS) and chose protocol v2. D-012
+logged; SCOPE Phase-1 ticked and SCOPE frozen for Phase-2 collection.
+Findings/decisions: D-012 — protocol v2 adopted on a priori grounds; the 50-question v2 re-run
+is a plumbing check only (parse rate/refusals/cost/determinism), explicitly not an accuracy
+bake-off, so protocol selection never conditions on data feeding the confirmatory sample.
+Cost this session: no project-API runs at log time. Running total USD 0.1572.
+Broke / changed: n/a.
+Gate status: Phase-1 MVP — **PASSED** (human sign-off 2026-07-16). Phase-2 gate open (metrics
+pass known-input unit tests; provenance recorded).
+Next action: data-engineer re-runs the 50-question slice under protocol v2 (plumbing check),
+then Phase-2 full build: collection + LLM classifier (~5,700 candidates, haiku), batched
+elicitation (~1,600 q × 3 models, est. $6–11, hard stop if a run projects > $25), scoring core
+with known-input unit tests. Stop at Phase-2 gate for human sign-off.
+Blockers: none.
+
 ### 2026-07-16 — Cross-chat handoff; MVP gate + protocol decision pending — Phase 1
 Done: Human requested a fresh orchestrator chat. Repo left in resumable state per HANDOFF.
 Clarification recorded so the next orchestrator does not re-litigate it: **haiku-4-5 remains in

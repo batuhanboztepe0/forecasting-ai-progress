@@ -171,3 +171,27 @@ set maximizes RQ2's per-model pre/post contrast at fixed cost.
 Consequences: Single-provider panel with only two distinct cutoffs — a stated limitation (RQ2
 capability-recency spread is narrow; no cross-provider generalization claim). Play-money-only
 RQ4 caveat stands; Polymarket and a multi-provider panel are explicit future work.
+
+### D-012 — Elicitation protocol v2 (reasoning-first) for Phase 2+   (status: accepted)   2026-07-16
+Context: Phase-1 MVP ran protocol v1 (bare JSON probability ask). The MVP gate carried a
+pre-registered A/B decision: keep v1, or switch to v2 (1–2 sentences of reasoning before the same
+JSON contract), decided before any full-scale data to avoid post-hoc tuning. A targeted literature
+check (researcher, 2026-07-16, verified against the papers) found: ForecastBench (arXiv 2409.19839)
+directly compares scratchpad vs. zero-shot elicitation and scratchpad wins consistently (e.g.,
+Brier 0.122 vs. 0.131 for Claude-3.5-Sonnet, ~7% relative); Halawi et al. (arXiv 2402.18563) and
+Schoenegger et al. (arXiv 2402.19379) both use reasoning-first elicitation and ran no bare-ask
+control; one caveat study (arXiv 2506.01578) warns explicit "Bayesian reasoning" framings can hurt
+accuracy, so v2 keeps the reasoning instruction brief and neutral.
+Decision: Adopt protocol v2 for all Phase-2+ elicitation, identically for all panel models: the
+model writes 1–2 sentences of key considerations (a base-rate anchor where natural; no Bayesian
+framing) and then the same JSON output contract as v1. Selection is on the a priori literature
+grounds above (human sign-off 2026-07-16). The 50-question slice re-run (~$0.15) is a plumbing
+check — parse rate, refusals, cost, cache determinism — NOT an accuracy bake-off; v2 stands
+regardless of which protocol scores better on those 50 questions.
+Reasoning: Reasoning-first is the field's standard elicitation and the only direct comparison
+favors it; the stronger protocol gives every panel model its best fair shot, making model-vs-crowd
+comparisons meaningful. Fixing the choice a priori (not by slice accuracy) avoids selecting the
+protocol on data that feeds the confirmatory sample.
+Consequences: MVP v1 numbers are protocol-inconsistent with Phase-2 numbers (kept as a descriptive
+protocol-sensitivity comparison only). Output cost rises ~$1–2 at full scale. Haiku's
+canonical-probability anomaly may persist or resolve under v2 — monitored and reported either way.
