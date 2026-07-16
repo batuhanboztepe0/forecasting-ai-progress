@@ -26,6 +26,30 @@ Blockers: <none | ...>
 
 ---
 
+### 2026-07-16 — Cross-chat handoff; MVP gate + protocol decision pending — Phase 1
+Done: Human requested a fresh orchestrator chat. Repo left in resumable state per HANDOFF.
+Clarification recorded so the next orchestrator does not re-litigate it: **haiku-4-5 remains in
+the panel under BOTH protocol options** — the pending A/B decision changes only the elicitation
+prompt, identically for all three models (A = protocol v1, bare JSON ask, haiku reported as-is;
+B = protocol v2, 1–2 sentences of reasoning before the JSON, to be logged as D-012 and re-run on
+the 50-question slice ~$0.15 before any Phase-2 scale-up). Dropping haiku was considered and
+recommended AGAINST: the RQ3-confirmatory clean sample (N≈791) is defined by haiku's training
+cutoff and requires haiku's forecasts — without haiku, RQ3 falls back to exploratory (N=175,
+per D-008), and the weak-forecaster contrast that powers RQ2 is lost.
+Findings/decisions: none new; MVP results and the haiku root-cause are in the previous entry.
+Cost this session: no new LLM runs. Running total USD 0.1572.
+Broke / changed: n/a.
+Gate status: Phase-1 MVP — deliverables complete and committed (ac2a8c2); **PENDING human
+sign-off + protocol v1-vs-v2 decision**.
+Next action (fresh orchestrator): read the six state files per HANDOFF §Core principle, restate
+current state, collect the human's MVP sign-off and A/B decision. If B: log D-012, data-engineer
+re-runs the 50-question slice under protocol v2, quant-analyst re-scores, compare, then Phase 2.
+If A: straight to Phase 2 — full collection, LLM classifier (haiku, ~5,700 candidates), batched
+elicitation (~1,600 q × 3 models, est. $6–11), scoring core with known-input unit tests (day-3
+schedule). Workflow unchanged: orchestrator dispatches named subagents serially; agents never
+commit; stop at every phase gate.
+Blockers: human decision (MVP sign-off + A/B).
+
 ### 2026-07-16 — Phase-1 MVP thin slice complete; gate pending sign-off — Phase 1
 Done: Full end-to-end thin slice. data-engineer: 50 seeded questions (25 post-/25 pre-cutoff,
 15 clean for all three models) × 3 panel models → 150/150 elicitations (0 parse errors, 0
