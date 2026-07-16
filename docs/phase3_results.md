@@ -120,3 +120,67 @@ Close-date distribution (YYYY-MM):
 - JSON: `data/interim/phase3_rq123.json` (SHA-256: `7a540fdde2c758a5f681d98518f76b8dd36c54cc3f526effc5adef9a699879a8`)
 - Figure: `docs/figures/rq3_coef_forest.png`
 - Bootstrap N: 10000 | Seed: 42 | Clamp eps: 1e-07
+
+
+---
+
+## RQ4 — Friction-Aware Backtest (H4)
+
+**Pre-registration:** D-016 §6.
+**Status:** CONFIRMATORY (haiku_clean); EXPLORATORY (sonnet/opus jan2026_clean).
+
+### Parameters
+
+| Parameter | Value |
+|---|---|
+| CPMM convention | p_YES = N/(Y+N); total_liquidity = L = Y+N; k = p(1-p)L² |
+| Fee rate | 5% of gross profit on wins (flat estimate; see Caveats) |
+| Bankroll | B₀ = 1000 mana; stake = 1% x B₀ = 10 mana (fixed, no compounding) |
+| Bet threshold | |p_model - p_market| > 0.05 |
+| Order | Sequential by resolved_at (ascending) |
+| Bootstrap | N = 10,000, seed = 42, percentile CI [2.5%, 97.5%] |
+| Platt | 5-fold CV, seed = 42, logit-scale logistic recalibration (out-of-fold) |
+
+### H4 confirmatory — haiku_clean (N = 352)
+
+| Metric | Value |
+|---|---|
+| N excluded (L = 0 or p_market degenerate) | 0 |
+| N bets placed | 273 (143 YES, 130 NO) |
+| N correct | 60 |
+| Hit rate | 0.220 |
+| Total staked | 2730 mana |
+| Total P&L | -1199.05 mana |
+| ROI | -43.92% |
+| 95% bootstrap CI | [-1648.66, -709.78] mana |
+| **H4 decision** | **NO-EDGE** |
+
+H4 "edge survives" iff 95% CI excludes <= 0.
+
+### Platt recalibration secondary — haiku_clean
+
+| Variant | N bets | Hit rate | Total P&L | ROI | 95% CI (mana) |
+|---|---|---|---|---|---|
+| Main | 273 | 0.220 | -1199.05 | -43.92% | [-1648.66, -709.78] |
+| +Platt | 320 | 0.122 | -1762.50 | -55.08% | [-2238.77, -1208.96] |
+
+### Exploratory — sonnet & opus on jan2026_clean (N = 72)
+
+| Model | N bets | Hit rate | Total P&L | ROI | 95% CI (mana) |
+|---|---|---|---|---|---|
+| Sonnet-5 | 56 | 0.304 | -66.17 | -11.82% | [-335.71, +274.34] |
+| Opus-4-8 | 58 | 0.362 | -29.91 | -5.16% | [-302.15, +312.64] |
+
+### Caveats
+
+1. **Play-money.** Manifold Markets uses mana (play-money). No real economic stakes; prices may diverge from true probabilities without real arbitrage pressure. All ROI and P&L figures are in mana units with no direct monetary interpretation.
+2. **Thin markets.** Median total_liquidity = 1000 mana for haiku_clean; some markets have L < 100. CPMM slippage is material at low liquidity (gross profit is substantially below the frictionless level).
+3. **Counterfactual fills.** Backtest assumes bets fill at the CPMM price implied by the snapshot at T = resolved_at - 30d. Real fills would differ if other traders act between T and an actual bet submission, or if the market's pool state differs from the snapshot.
+4. **No position limits.** Fixed stake ignores correlation across simultaneous open positions and risk concentration in correlated question clusters.
+5. **Fee uncertainty.** Creator fees (0-5%) are per-market and not stored in the dataset. The 5% flat estimate may over- or under-state true costs for any individual market.
+
+### Artifacts
+
+- JSON: `data/interim/phase3_rq4.json`
+- Figure: `docs/figures/rq4_pnl.png`
+- Bootstrap N: 10,000 | Seed: 42 | Fee: 0.05 | Stake: 10 mana
