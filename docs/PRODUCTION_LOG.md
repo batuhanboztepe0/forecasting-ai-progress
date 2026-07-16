@@ -26,6 +26,39 @@ Blockers: <none | ...>
 
 ---
 
+### 2026-07-17 — Phase-3 red-team gate: PASS_WITH_FIXES → fixes applied; gate deliverables complete — Phase 3
+Done: Red-team gate ran as a 16-agent adversarial workflow: 4 independent lenses (leakage/
+contamination, statistical validity, RQ4 market mechanics with live-API+docs verification,
+reproducibility/claims-vs-artifacts), every BLOCKER/MAJOR candidate then attacked by 2
+independent refutation voters. Result: **0 blockers, 6 majors survived** — all documentation/
+labeling issues; NO confirmatory number or decision invalidated. Key positive verifications:
+elicitation prompts clean (raw cache inspected); snapshots match raw bet files (incl. a
+close_at<T case); haiku_clean N=352 membership independently recomputed, exact match; H3a/H3b
+coefficients and H1-crowd CITL independently reproduced to 4+ decimals; BH procedure re-derived
+by hand; **RQ4's 22% hit rate confirmed NOT an inverted-sign artifact** (bet direction re-derived
+from raw forecasts); CPMM convention errors quantified (<5% per winning bet under any defensible
+convention) — H4 NO-EDGE robust. Fixes applied by quant-analyst (docs/comments/labels only;
+both results JSONs byte-unchanged, SHA-256 verified; 73 tests green): BH-vs-conjunction
+bridging + footnote, RQ4 relabeled PRELIMINARY per D-005, Maniswap/addedLiquidity/fee caveats,
+comment fixes, sensitivity sign-flip + RQ2 base-rate + RQ3 clamp-asymmetry disclosures.
+**CORRECTION (append-only):** the earlier Phase-3a entry cited H3a CI "[0.722, 1.640]" — wrong.
+Source was the quant agent's summary message, inconsistent with its own JSON artifact; the
+orchestrator copied it unverified. Correct values (phase3_rq123.json): Wald [0.937, 1.424],
+seeded bootstrap [0.983, 1.503]. Caught by the red-team gate (MAJOR 4). Effect size, direction,
+p-value, and the H3a decision are unaffected.
+Findings/decisions: MAJOR 6 (clean-checkout repro impossible while phase2 data is git-ignored
+and data/release/ doesn't exist) is by design the Phase-4 deliverable — carried into Phase 4 as
+a BLOCKING item: dataset release + reproduction from clean clone verified before ship.
+Cost this session: $0 API (workflow agents are session-side, not project API). Running total
+USD 7.5120.
+Broke / changed: n/a beyond the correction above.
+Gate status: Phase-3 gate (red-team) — deliverables complete, fixes applied and verified.
+**PENDING human sign-off.**
+Next action: human sign-off on Phase-3 → Phase 4: scientific-writer report (docs/WRITING_STYLE
+voice), data/release/ dataset + datasheet (CC-BY-4.0, per-source attribution), README, clean-
+checkout reproduction check, final red-team pass on the write-up.
+Blockers: human sign-off.
+
 ### 2026-07-17 — Phase 3a: RQ1–RQ3 confirmatory package complete — Phase 3
 Done: quant-analyst ran the D-016 plan exactly (rq_confirmatory.py; results JSON
 SHA-256-stable across runs; 73 unit tests re-verified green by orchestrator). Outputs:

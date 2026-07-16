@@ -4,10 +4,19 @@ rq4_backtest.py — RQ4 friction-aware backtest on post-cutoff questions.
 
 D-016 §6 implementation (frozen spec).
 
-CPMM model
-----------
-Convention: p_YES = N/(Y+N) where Y=YES_pool, N=NO_pool, L=Y+N (total shares).
-total_liquidity stores L = Y+N.  k = Y*N = p*(1-p)*L².
+CPMM model (approximation)
+--------------------------
+Note: Manifold uses Maniswap (k = Y^p0 * N^(1-p0)), not standard CPMM.
+The stored total_liquidity field is Manifold's addedLiquidity (cumulative mana
+deposited), not pool shares; live-API spot checks found actual pool sums 7-12x
+larger.  This backtest uses standard binary CPMM as an approximation, with
+p_YES = N/(Y+N), treating L = total_liquidity as a proxy for pool depth.
+Quantified impact: for large-L markets both errors change gross profit <5% per
+winning bet; losses dominate wins (hit rate 22%), so the H4 NO-EDGE decision
+is robust to any defensible convention.  The true p0 and pool state at T were
+not stored and cannot be retrieved retrospectively.
+
+Convention used: p_YES = N/(Y+N), L = total_liquidity (proxy), k = p*(1-p)*L².
 
 Bet YES (p_model > p_market + threshold):
   Bettor mints s YES + s NO shares; keeps s YES; sells s NO to pool.
@@ -462,7 +471,7 @@ def _write_rq4_md(
 ## RQ4 — Friction-Aware Backtest (H4)
 
 **Pre-registration:** D-016 §6.
-**Status:** CONFIRMATORY (haiku_clean); EXPLORATORY (sonnet/opus jan2026_clean).
+**Status:** PRELIMINARY (haiku_clean); EXPLORATORY (sonnet/opus jan2026_clean).  Strategy and threshold are pre-registered (D-016 §6), but H4 sits outside the confirmatory BH family and is designated preliminary per D-005 (play-money platform; no real economic stakes).
 
 ### Parameters
 
@@ -476,7 +485,7 @@ def _write_rq4_md(
 | Bootstrap | N = {N_BOOT:,}, seed = {BOOT_SEED}, percentile CI [2.5%, 97.5%] |
 | Platt | {PLATT_FOLDS}-fold CV, seed = {PLATT_SEED}, logit-scale logistic recalibration (out-of-fold) |
 
-### H4 confirmatory — haiku_clean (N = {h['N_questions']})
+### H4 preliminary — haiku_clean (N = {h['N_questions']})
 
 | Metric | Value |
 |---|---|

@@ -39,7 +39,7 @@ H3a: b_crowd ≠ 0 (market carries info beyond model).  H3b: b_model ≠ 0 (mode
 
 | Cell | Status | N | ρ | b_crowd | Wald 95%CI | Wald p | Boot 95%CI | Boot p | b_model | Wald 95%CI | Wald p | Boot 95%CI | Boot p |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| Haiku / haiku_clean (N=352)    | confirmatory   | 352 | 0.317 | +1.1807 | [0.9374,1.4241] | <0.001 | [0.9833,1.5026] | <0.001 | +0.1070 | [-0.1174,0.3313] | 0.350 | [-0.1376,0.3343] | 0.364 |
+| Haiku / haiku_clean (N=352)    | confirmatory   | 352 | 0.317 | +1.1807 | [0.9374,1.4241] | <1e-15 | [0.9833,1.5026] | <0.001 | +0.1070 | [-0.1174,0.3313] | 0.350 | [-0.1376,0.3343] | 0.364 |
 | Sonnet-5 / jan2026_clean (N=72) | exploratory    |  72 | 0.472 | +0.9363 | [0.4977,1.3748] | <0.001 | [0.6007,1.8935] | 0.027 | +0.0675 | [-0.3186,0.4537] | 0.732 | [-0.4600,0.4958] | 0.765 |
 | Opus-4-8 / jan2026_clean (N=72) | exploratory    |  72 | 0.504 | +0.8805 | [0.4506,1.3103] | <0.001 | [0.5645,1.8470] | 0.031 | +0.2758 | [-0.1464,0.6980] | 0.200 | [-0.2413,0.7971] | 0.249 |
 
@@ -54,6 +54,8 @@ Family: {H1-crowd, H1-haiku, H2-haiku, H3a-haiku, H3b-haiku}.
 | H2-haiku             | 0.104    | 3 | 0.0600 | 0.174 | no |
 | H3b-haiku            | 0.350    | 4 | 0.0800 | 0.438 | no |
 | H1-haiku             | 0.867    | 5 | 0.1000 | 0.867 | no |
+
+> **Footnote — BH rejection vs H1 conjunction:** BH "rejected" (YES) applies to the CI-excludes-zero p-value only. H1's pre-registered decision is the conjunction: CI excludes 0 AND |CITL| ≥ 0.05 (D-016 §1). H1-crowd is BH-significant but fails the effect-size arm of the conjunction; see RQ1 narrative for the full decision.
 
 ## Sensitivity Analyses (D-014 / D-016 §5)
 
@@ -101,15 +103,15 @@ Close-date distribution (YYYY-MM):
 
 (CONFIRMATORY and EXPLORATORY labels follow D-016.  CIs are 95% percentile-bootstrap or Wald as stated.  Effect sizes are logit-scale unless noted.)
 
-- **RQ1 (H1 — Calibration).**  CONFIRMATORY crowd/overall (N=1,187): CITL=+0.0346, 95% CI [+0.0169, +0.0526], p=<0.001; decision: FAIL-CITL-THRESHOLD (CI excludes 0 but |CITL|<0.05).  CONFIRMATORY haiku/haiku_clean (N=352): CITL=+0.0044, p=0.867; decision: FAIL-TO-REJECT (CI includes 0).  Calibration slope: crowd=1.3022, haiku(clean)=0.3530 — all models substantially below 1.0, indicating systematic overconfidence in the logit domain.
+- **RQ1 (H1 — Calibration).**  CONFIRMATORY crowd/overall (N=1,187): CITL=+0.0346, 95% CI [+0.0169, +0.0526], p=<0.001; decision: FAIL-CITL-THRESHOLD (CI excludes 0 but |CITL|<0.05).  H1-crowd is BH-significant (p=0.0003 < BH threshold 0.04) but fails the pre-registered effect-size threshold (|CITL| point estimate = 0.035 < 0.05); per the pre-registered conjunction rule (D-016 §1) this is a NULL result for H1-crowd.  Note: the |CITL| ≥ 0.05 threshold is applied to the point estimate, not to CI bounds (per D-016 §1).  CONFIRMATORY haiku/haiku_clean (N=352): CITL=+0.0044, p=0.867; decision: FAIL-TO-REJECT (CI includes 0).  Calibration slope: crowd=1.3022, haiku(clean)=0.3530 — all models substantially below 1.0, indicating systematic overconfidence in the logit domain.
 
-- **RQ2 (H2 — Skill drop post-cutoff).**  CONFIRMATORY haiku: BSS_post(haiku_clean)=-0.0646, BSS_pre(probe)=+0.0548, ΔBSS=-0.1194, 95% CI [-0.2684, +0.0214], p=0.104.  Post-cutoff BSS CI: [-0.1917, 0.0502] — includes ≤ 0, FLAGGED.  All three models show negative post-cutoff BSS and strongly negative ΔBSS — consistent with H2, confirmatory for haiku, exploratory for sonnet/opus.
+- **RQ2 (H2 — Skill drop post-cutoff).**  CONFIRMATORY haiku: BSS_post(haiku_clean)=-0.0646, BSS_pre(probe)=+0.0548, ΔBSS=-0.1194, 95% CI [-0.2684, +0.0214], p=0.104.  Post-cutoff BSS CI: [-0.1917, 0.0502] — includes ≤ 0, FLAGGED.  All three models show negative post-cutoff BSS and strongly negative ΔBSS — consistent with H2, confirmatory for haiku, exploratory for sonnet/opus.  Limitation: ΔBSS compares BSS across strata (haiku_clean vs haiku_probe) that have different base rates (0.324 vs 0.341); the BSS reference term p̄(1-p̄) differs, so ΔBSS is not a pure skill contrast — the pre/post base-rate difference confounds a small portion of the gap.
 
-- **RQ3 (H3a/H3b — Encompassing).**  CONFIRMATORY haiku/haiku_clean (N=352): b_crowd=+1.1807 (Wald p=<0.001), b_model=+0.1070 (Wald p=0.350), logit ρ(crowd,model)=0.317.  Bootstrap p-values agree with Wald to within rounding.
+- **RQ3 (H3a/H3b — Encompassing).**  CONFIRMATORY haiku/haiku_clean (N=352): b_crowd=+1.1807 (Wald p < 1e-15, reported as <0.001 due to float underflow at storage), b_model=+0.1070 (Wald p=0.350), logit ρ(crowd,model)=0.317.  Bootstrap p-values agree with Wald to within rounding.  Disclosure: model probabilities were clamped to [0.01, 0.99] at elicitation while crowd probabilities range wider (0.004–0.993); this produces an asymmetric logit range between the two covariates, which may attenuate b_model relative to an unclamped analysis.
 
 - **BH correction.**  See table above.  The 5-test family uses q=0.10.
 
-- **Sensitivities (D-014).**  Adding the 38 close_before_cutoff_haiku questions or removing 38 close_before_T questions from haiku_clean changes sample size (N=390 or N=314) but no sign or decision flips are expected for strong effects.  See sensitivity tables.
+- **Sensitivities (D-014).**  Adding the 38 close_before_cutoff_haiku questions or removing 38 close_before_T questions from haiku_clean changes sample size (N=390 or N=314) but no sign or decision flips for strong effects.  See sensitivity tables.  Note: H1-haiku CITL flips sign under sensitivity (b) (+0.004 → −0.021); both values are deep inside the |CITL| < 0.05 null zone, so neither reaches the conjunction threshold — the H1-haiku decision is unchanged.
 
 - **Jan2026 anomaly.**  Negative CITL (-13 to -18pp) on jan2026_clean reflects a higher-than-overall YES base rate (45.8% vs 33.8%) on a small N=72 subset.  The crowd is nearly unbiased on this subset; models under-predict, consistent with an information-recency gap.  This is exploratory.
 
@@ -127,13 +129,13 @@ Close-date distribution (YYYY-MM):
 ## RQ4 — Friction-Aware Backtest (H4)
 
 **Pre-registration:** D-016 §6.
-**Status:** CONFIRMATORY (haiku_clean); EXPLORATORY (sonnet/opus jan2026_clean).
+**Status:** PRELIMINARY (haiku_clean); EXPLORATORY (sonnet/opus jan2026_clean).  Strategy and threshold are pre-registered (D-016 §6), but H4 sits outside the confirmatory BH family and is designated preliminary per D-005 (play-money platform; no real economic stakes).
 
 ### Parameters
 
 | Parameter | Value |
 |---|---|
-| CPMM convention | p_YES = N/(Y+N); total_liquidity = L = Y+N; k = p(1-p)L² |
+| CPMM convention | Standard binary CPMM used as approximation; see Caveats — Manifold uses Maniswap |
 | Fee rate | 5% of gross profit on wins (flat estimate; see Caveats) |
 | Bankroll | B₀ = 1000 mana; stake = 1% x B₀ = 10 mana (fixed, no compounding) |
 | Bet threshold | |p_model - p_market| > 0.05 |
@@ -141,7 +143,7 @@ Close-date distribution (YYYY-MM):
 | Bootstrap | N = 10,000, seed = 42, percentile CI [2.5%, 97.5%] |
 | Platt | 5-fold CV, seed = 42, logit-scale logistic recalibration (out-of-fold) |
 
-### H4 confirmatory — haiku_clean (N = 352)
+### H4 preliminary — haiku_clean (N = 352)
 
 | Metric | Value |
 |---|---|
@@ -174,10 +176,11 @@ H4 "edge survives" iff 95% CI excludes <= 0.
 ### Caveats
 
 1. **Play-money.** Manifold Markets uses mana (play-money). No real economic stakes; prices may diverge from true probabilities without real arbitrage pressure. All ROI and P&L figures are in mana units with no direct monetary interpretation.
-2. **Thin markets.** Median total_liquidity = 1000 mana for haiku_clean; some markets have L < 100. CPMM slippage is material at low liquidity (gross profit is substantially below the frictionless level).
-3. **Counterfactual fills.** Backtest assumes bets fill at the CPMM price implied by the snapshot at T = resolved_at - 30d. Real fills would differ if other traders act between T and an actual bet submission, or if the market's pool state differs from the snapshot.
-4. **No position limits.** Fixed stake ignores correlation across simultaneous open positions and risk concentration in correlated question clusters.
-5. **Fee uncertainty.** Creator fees (0-5%) are per-market and not stored in the dataset. The 5% flat estimate may over- or under-state true costs for any individual market.
+2. **Maniswap, not standard CPMM.** Manifold uses Maniswap (k = Y^p0 · N^(1-p0)), not the standard constant-product CPMM (k = Y·N). The backtest code approximates Maniswap with standard CPMM using the convention p_YES = N/(Y+N), L = Y+N.
+3. **total_liquidity is addedLiquidity, not pool shares.** The stored field reflects cumulative mana deposited as liquidity (Manifold's `addedLiquidity`); live-API spot checks found actual pool share sums 7-12x larger than this field. Quantified impact: for large-L markets both errors (wrong formula, wrong L) change gross profit by <5% per winning bet. Because losses dominate wins across all cells (hit rate 22%), the H4 NO-EDGE decision is robust to any defensible convention. The true p0 and pool state at snapshot T were not stored and cannot be retrieved retrospectively.
+4. **Counterfactual fills.** Backtest assumes bets fill at the snapshot-T price. Real fills differ if other traders act between T and bet submission.
+5. **No position limits.** Fixed stake ignores open-position correlation and risk concentration.
+6. **Fee assumption.** The 5%-of-gross-profit fee is an approximation of Manifold's per-trade fee structure (which varies by market and has changed over time); stated explicitly as an assumption, not an observed rate.
 
 ### Artifacts
 

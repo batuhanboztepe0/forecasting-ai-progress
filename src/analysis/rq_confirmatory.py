@@ -237,7 +237,7 @@ def run_rq1_cell(probs: list[float], outcomes: list[int],
     beta2, se2, _ = _irls_Np(X2, y_arr)
     cal_intercept = float(beta2[0])
     cal_slope     = float(beta2[1])
-    slope_p       = _wald_pvalue(cal_slope - 1.0, float(se2[1]))  # H0: slope=1? No — H0: slope=0 for Wald
+    slope_p       = _wald_pvalue(cal_slope - 1.0, float(se2[1]))  # H0: slope=1 (deviation from perfect calibration)
     # Per SCOPE: report slope with CI; slope=1 is perfect calibration
     # Wald CI on slope (not on slope-1; the test is for slope ≠ 0, but CI on slope is informative)
     slope_lo = cal_slope - Z95 * float(se2[1])
