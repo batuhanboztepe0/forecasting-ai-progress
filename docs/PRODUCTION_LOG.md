@@ -26,6 +26,36 @@ Blockers: <none | ...>
 
 ---
 
+### 2026-07-16 — Phase-2 step A: collection + classifier (v1.0→v1.1 realignment) — Phase 2
+Done: data-engineer built the Phase-2 pipeline (src/phase2/): LLM classifier over the 3,728
+keyword candidates (the handoff's "~5,700" was the dedup-dropped count — reconciled), stratum
+builder, crowd-snapshot fetcher with checkpointing, provenance manifest. Classifier v1.0 dropped
+50.8% — orchestrator audit of a seeded 40-drop sample found ~5–8 in-domain per DATA.md (v1.0
+silently narrowed the pre-registered definition; adoption/impact and lab/company outcomes
+excluded). Logged D-013 and re-ran the full pool under a DATA.md-aligned v1.1 prompt (both
+versions cached and auditable; no per-question mixing). Orchestrator then audited v1.1 three
+ways: 40 keeps (40/40 in-domain, all five categories represented), 40 overall drops, and 40
+newly-dropped v1.0-keeps.
+Findings/decisions: v1.1 kept 1,694 / dropped 2,034 (recovered 198 v1.0 false drops — e.g.
+"OpenAI $1B revenue", "AI YouTube video 100M views", "Altman-funded fabs"; newly dropped 340
+v1.0 junk keeps — personal-belief, market-meta, joke-framed questions). Residual drop-side
+false-negative rate ≈7.5% clear (95% CI ~3–20%; idiosyncratic misreads + release-timing gray
+zone), keeps precision ≈95–100% — ACCEPTED: residuals are not category-systematic, classifier
+never sees resolutions (cannot bias model-vs-crowd comparisons; only trims N), and further
+iteration would risk sample-tuning. Error rates to be documented in the datasheet. Final strata
+(v1.1): haiku-clean 390; pre-cutoff probe 797 (3 hard-dropped: 2 zero-trade + 1 Manifold 503,
+per D-013 ≥1-bet-at/before-T rule, no AMM fallback); jan-2026-clean 102 (still exploratory per
+D-011 §5); total 1,187 records, all with non-null crowd_prob_at_T + microstructure.
+Cost this session: classifier v1.0 $0.8659 + v1.1 $1.8024 (v1.1 prompt ~3× longer). Running
+total USD 3.1710.
+Broke / changed: v1.1 net keeps DOWN vs v1.0 (-142) — surprising but correct (v1.0 was keeping
+junk); one Manifold 503 fetch error treated as hard drop.
+Gate status: Phase-2 gate open. Pre-elicitation red-team review of sample definition +
+elicitation plan queued (protects the ~$6–11 elicitation spend).
+Next action: red-team-reviewer pass (leakage, sample validity) → fix anything material → step B
+batched elicitation (1,187 q × 3 models, protocol v2, + 100-q × 3 variance probe on sonnet-5).
+Blockers: none.
+
 ### 2026-07-16 — Protocol v2 plumbing check PASSED; Phase-2 build starts — Phase 2
 Done: data-engineer re-ran the 50-question slice under protocol v2 (D-012): 150/150 elicitations,
 0 parse errors, 0 refusals, reasoning brief (median ~98 tokens), cache-deterministic (SHA-256 of

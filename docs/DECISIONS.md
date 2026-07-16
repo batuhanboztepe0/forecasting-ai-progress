@@ -195,3 +195,31 @@ protocol on data that feeds the confirmatory sample.
 Consequences: MVP v1 numbers are protocol-inconsistent with Phase-2 numbers (kept as a descriptive
 protocol-sensitivity comparison only). Output cost rises ~$1–2 at full scale. Haiku's
 canonical-probability anomaly may persist or resolve under v2 — monitored and reported either way.
+
+### D-013 — Classifier v1.1 realignment to the pre-registered domain definition; snapshot inclusion rule   (status: accepted)   2026-07-16
+Context: Phase-2 step A ran the LLM-assisted question classifier (prompt v1.0, haiku) over the
+3,728 keyword candidates and dropped 50.8% — far above the ~15% false-positive rate the recon
+estimated. Orchestrator audit of a seeded 40-question sample of DROPS found ~5–8 (12–20%) are
+in-domain by the letter of DATA.md's pre-registered definition — the v1.0 prompt applied a
+narrow "capabilities/benchmarks/releases" reading and systematically excluded two categories
+DATA.md explicitly includes: adoption/impact claims about AI, and AI-lab/company outcomes (e.g.,
+dropped: "OpenAI discovers the first proof of the Collatz conjecture" — a capability milestone;
+"Will OpenAI raise over $5B by end of 2024" — a lab/company outcome; "AI-generated YouTube video
+reaches 10M views" — adoption/impact). Extrapolated, ~240–380 questions may be wrongly excluded.
+The audit of 40 KEPT questions found 40/40 relevant (precision is not the problem).
+Decision: (1) Rewrite the classifier prompt as v1.1, aligned verbatim to DATA.md's five
+categories (benchmarks/saturation; model releases and capabilities incl. AI-achieved milestones;
+compute/scaling; adoption/impact of AI; AI-lab/company outcomes), still excluding personal/joke
+questions, market-meta questions, personnel gossip, naming trivia, and governance/regulation-only
+questions. (2) Re-run the FULL candidate pool under v1.1 (~$0.87 batched); both versions'
+decisions stay cached and auditable; the final sample uses v1.1 only — no per-question
+cherry-picking between versions. (3) Snapshot inclusion rule, made explicit: a question enters
+the sample only if it has ≥1 bet at/before T; the AMM initial price is not a crowd forecast, so
+no refill from 0-trade questions (step A's 2 attempted refills are discarded).
+Reasoning: The sample must match the pre-registered domain definition (DATA.md), not a silently
+narrowed one — this is enforcement of pre-registration, not a definition change. The fix is
+decided before any elicitation or outcome analysis on the affected questions, so it cannot be
+outcome-driven. Full re-run (not drops-only reclassification) keeps the procedure symmetric.
+Consequences: +~$0.87 classifier cost; strata Ns change (recorded in EXPERIMENTS/log once
+re-run completes); classifier v1.0 decisions retained for audit; a residual borderline band
+(e.g., governance questions) is documented as excluded BY RULE in the datasheet.
