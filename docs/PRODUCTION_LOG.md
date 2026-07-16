@@ -26,6 +26,29 @@ Blockers: <none | ...>
 
 ---
 
+### 2026-07-16 — Protocol v2 plumbing check PASSED; Phase-2 build starts — Phase 2
+Done: data-engineer re-ran the 50-question slice under protocol v2 (D-012): 150/150 elicitations,
+0 parse errors, 0 refusals, reasoning brief (median ~98 tokens), cache-deterministic (SHA-256 of
+output CSV identical live vs. cache-only). quant-analyst re-scored with the v1 machinery
+(known-input self-test PASS; deterministic across runs) → data/interim/mvp_scores_v2.csv,
+docs/figures/mvp_calibration_v2.png, docs/protocol_v2_check.md (descriptive sensitivity only).
+Findings/decisions: Haiku's v1 canonical-probability degeneracy substantially resolved under v2
+(8→19 distinct probabilities; Brier 0.257→0.160; CITL +0.187→+0.055; v1 anomaly flags absent).
+Sonnet-5 and Opus-4-8 essentially unchanged (small differences within n=50 noise). Consistent
+with ForecastBench's scratchpad-beats-zero-shot finding, strongest for weaker models. Per D-012
+no decision rides on these numbers — v2 was adopted a priori.
+Cost this session: mvp-thin-slice-v2 $0.3455. Running total USD 0.5027.
+Broke / changed: data/mvp_manifest.json restructured from single entry to a 2-entry list (v1
+entry preserved verbatim).
+Gate status: Phase-2 gate open (metrics pass known-input unit tests; provenance recorded);
+pre-scale-up plumbing check PASSED.
+Next action: data-engineer Phase-2 step A — full collection + LLM classifier (haiku over the
+recon candidate pool), final elicitation set per D-011 §4 (≈791 haiku-clean + ≈800 pre-cutoff
+probe), crowd_prob_at_T + microstructure snapshots, provenance manifest. Then step B — batched
+elicitation (~1,600 q × 3 models under protocol v2, est. $6–11; hard stop if any run projects
+> $25). Then quant-analyst scoring core with known-input unit tests. Stop at Phase-2 gate.
+Blockers: none.
+
 ### 2026-07-16 — Phase-1 gate PASSED; protocol v2 locked (D-012); Phase 2 open — Phase 1→2
 Done: Fresh orchestrator resumed per HANDOFF (six state files read, state echoed, repo verified
 against handoff commit 36c6e8c). Before the A/B ask, researcher ran a targeted literature check

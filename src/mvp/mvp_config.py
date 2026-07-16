@@ -87,6 +87,9 @@ ALL3_CLEAN_MIN_N: int = 8
 
 ELICITATION_PROTOCOL_VERSION: str = "v1"
 
+# D-012 — Protocol v2 version tag (do not rename v1; provenance)
+ELICITATION_PROTOCOL_VERSION_V2: str = "v2"
+
 # max_tokens cap (D-011: ≤ 1000)
 MAX_TOKENS: int = 1000
 
@@ -125,6 +128,8 @@ PILOT_QUESTIONS_PATH    = os.path.join(INTERIM_DIR, "pilot_questions.json")
 PILOT_CROWD_PROBS_PATH  = os.path.join(INTERIM_DIR, "pilot_crowd_probs.json")
 
 # Thin-slice outputs
-MVP_SAMPLE_PATH    = os.path.join(INTERIM_DIR, "mvp_sample.json")
-MVP_CROWD_PATH     = os.path.join(INTERIM_DIR, "mvp_crowd_probs.json")
-MVP_FORECASTS_PATH = os.path.join(INTERIM_DIR, "mvp_forecasts.csv")
+MVP_SAMPLE_PATH      = os.path.join(INTERIM_DIR, "mvp_sample.json")
+MVP_CROWD_PATH       = os.path.join(INTERIM_DIR, "mvp_crowd_probs.json")
+MVP_FORECASTS_PATH   = os.path.join(INTERIM_DIR, "mvp_forecasts.csv")
+# D-012 — protocol v2 output (same schema + protocol column)
+MVP_FORECASTS_V2_PATH = os.path.join(INTERIM_DIR, "mvp_forecasts_v2.csv")

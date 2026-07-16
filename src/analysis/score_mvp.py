@@ -62,6 +62,11 @@ CSV_OUT = os.path.join(REPO_ROOT, "data", "interim", "mvp_scores.csv")
 FIG_OUT = os.path.join(REPO_ROOT, "docs", "figures", "mvp_calibration.png")
 MD_OUT  = os.path.join(REPO_ROOT, "docs", "mvp_results.md")
 
+# v2 paths (protocol v2 = reasoning-first elicitation; D-012)
+CSV_IN_V2  = os.path.join(REPO_ROOT, "data", "interim", "mvp_forecasts_v2.csv")
+CSV_OUT_V2 = os.path.join(REPO_ROOT, "data", "interim", "mvp_scores_v2.csv")
+FIG_OUT_V2 = os.path.join(REPO_ROOT, "docs", "figures", "mvp_calibration_v2.png")
+
 # ── constants ─────────────────────────────────────────────────────────────────
 MODELS = [
     "claude-haiku-4-5-20251001",
@@ -445,7 +450,7 @@ def detect_anomalies(results):
 
 # ── reliability diagram (2×2 grid) ───────────────────────────────────────────
 
-def plot_reliability(questions, model_data, out_path):
+def plot_reliability(questions, model_data, out_path, title_suffix=""):
     """
     2×2 reliability diagram: crowd (top-left), Haiku (top-right),
     Sonnet-5 (bottom-left), Opus-4-8 (bottom-right).
@@ -470,7 +475,7 @@ def plot_reliability(questions, model_data, out_path):
     axes_flat = axes.flatten()
 
     fig.suptitle(
-        "MVP Reliability Diagrams  —  n = 50 questions, 5 fixed-width bins\n"
+        f"MVP Reliability Diagrams  —  n = 50 questions, 5 fixed-width bins{title_suffix}\n"
         "(small n → high per-bin variance; interpret cautiously)",
         fontsize=10,
         y=0.98,
@@ -675,12 +680,22 @@ def write_md_summary(results, anomalies, path):
 
 # ── main ──────────────────────────────────────────────────────────────────────
 
-def main():
-    """Run the full MVP scoring pipeline."""
+def run_pipeline(csv_in, csv_out, fig_out, md_out, title_suffix=""):
+    """
+    Full scoring pipeline parameterized by I/O paths.
+
+    Args:
+        csv_in:       Path to input forecasts CSV.
+        csv_out:      Path to write per-forecaster scores CSV.
+        fig_out:      Path to write reliability diagram PNG.
+        md_out:       Path to write markdown summary, or None to skip.
+        title_suffix: String appended to the reliability diagram title
+                      (e.g. ' — Protocol v2').
+    """
     run_self_test()
 
-    print(f"[data] Loading {CSV_IN}")
-    questions, model_data = load_data(CSV_IN)
+    print(f"[data] Loading {csv_in}")
+    questions, model_data = load_data(csv_in)
 
     sanity_msgs = sanity_check(questions, model_data)
     for msg in sanity_msgs:
@@ -703,12 +718,29 @@ def main():
     for a in anomalies:
         print(f"[check] {a}")
 
-    write_scores_csv(results, CSV_OUT)
-    plot_reliability(questions, model_data, FIG_OUT)
-    write_md_summary(results, anomalies, MD_OUT)
+    write_scores_csv(results, csv_out)
+    plot_reliability(questions, model_data, fig_out, title_suffix=title_suffix)
+    if md_out is not None:
+        write_md_summary(results, anomalies, md_out)
 
     print("[done] MVP scoring complete.")
 
 
+def main():
+    """Run the v1 scoring pipeline (default paths, no title suffix)."""
+    run_pipeline(CSV_IN, CSV_OUT, FIG_OUT, MD_OUT)
+
+
 if __name__ == "__main__":
-    main()
+    if "--protocol" in sys.argv:
+        _idx = sys.argv.index("--protocol")
+        if _idx + 1 >= len(sys.argv):
+            raise ValueError("--protocol requires a value (e.g. v2)")
+        _proto = sys.argv[_idx + 1]
+        if _proto == "v2":
+            run_pipeline(CSV_IN_V2, CSV_OUT_V2, FIG_OUT_V2, None,
+                         title_suffix=" — Protocol v2")
+        else:
+            raise ValueError(f"Unknown --protocol value: {_proto!r}  (expected 'v2')")
+    else:
+        main()

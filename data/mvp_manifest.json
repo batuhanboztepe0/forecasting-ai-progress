@@ -1,124 +1,194 @@
-{
-  "run_id": "mvp-thin-slice-2026-07-16",
-  "run_start_utc": "2026-07-16T10:41:30.633500+00:00",
-  "manifest_written_utc": "2026-07-16T10:41:30.671384+00:00",
-  "random_seed": 42,
-  "d011_decision": "docs/DECISIONS.md#D-011",
-  "source": "manifold",
-  "n_questions": 50,
-  "strata": {
-    "post_cutoff": 25,
-    "pre_cutoff": 25
-  },
-  "panel_models": [
-    "claude-haiku-4-5-20251001",
-    "claude-sonnet-5",
-    "claude-opus-4-8"
-  ],
-  "training_cutoffs": {
-    "claude-haiku-4-5-20251001": "2025-07-31",
-    "claude-sonnet-5": "2026-01-31",
-    "claude-opus-4-8": "2026-01-31"
-  },
-  "elicitation_protocol": {
-    "version": "v1",
-    "system_prompt_sha256": "02994c0cb5dfe97f6aadf4f964da392711f3c77faae9afa8d24cef93c6da4255",
-    "max_tokens": 1000,
-    "temperature": {
-      "claude-haiku-4-5-20251001": 0,
-      "claude-sonnet-5": "omitted",
-      "claude-opus-4-8": "omitted"
+[
+  {
+    "run_id": "mvp-thin-slice-2026-07-16",
+    "run_start_utc": "2026-07-16T10:41:30.633500+00:00",
+    "manifest_written_utc": "2026-07-16T10:41:30.671384+00:00",
+    "random_seed": 42,
+    "d011_decision": "docs/DECISIONS.md#D-011",
+    "source": "manifold",
+    "n_questions": 50,
+    "strata": {
+      "post_cutoff": 25,
+      "pre_cutoff": 25
     },
-    "thinking": "omitted for all models",
-    "prob_range": [
-      0.01,
-      0.99
+    "panel_models": [
+      "claude-haiku-4-5-20251001",
+      "claude-sonnet-5",
+      "claude-opus-4-8"
     ],
-    "cache_key_scheme": "sha256(qid|model|protocol_version|seed)[:32]; files at data/llm_cache/mvp_v1_{model}_{key}.json (git-ignored)"
-  },
-  "crowd_snapshot": {
-    "method": "Manifold /v0/bets; probAfter of last non-redemption bet at or before T; T = resolved_at - 30d",
-    "n_valid": 50,
-    "n_missing": 0
-  },
-  "elicitation_results": {
-    "total_input_tokens": 27309,
-    "total_output_tokens": 2116,
-    "total_usd": 0.10321,
-    "n_cache_hits": 150,
-    "n_api_calls": 0,
-    "n_parse_errors": 0,
-    "n_refusals": 0,
-    "per_model": {
-      "claude-haiku-4-5-20251001": {
-        "n_success": 50,
-        "n_parse_errors": 0,
-        "n_refusals": 0
+    "training_cutoffs": {
+      "claude-haiku-4-5-20251001": "2025-07-31",
+      "claude-sonnet-5": "2026-01-31",
+      "claude-opus-4-8": "2026-01-31"
+    },
+    "elicitation_protocol": {
+      "version": "v1",
+      "system_prompt_sha256": "02994c0cb5dfe97f6aadf4f964da392711f3c77faae9afa8d24cef93c6da4255",
+      "max_tokens": 1000,
+      "temperature": {
+        "claude-haiku-4-5-20251001": 0,
+        "claude-sonnet-5": "omitted",
+        "claude-opus-4-8": "omitted"
       },
-      "claude-sonnet-5": {
-        "n_success": 50,
-        "n_parse_errors": 0,
-        "n_refusals": 0
-      },
-      "claude-opus-4-8": {
-        "n_success": 50,
-        "n_parse_errors": 0,
-        "n_refusals": 0
+      "thinking": "omitted for all models",
+      "prob_range": [
+        0.01,
+        0.99
+      ],
+      "cache_key_scheme": "sha256(qid|model|protocol_version|seed)[:32]; files at data/llm_cache/mvp_v1_{model}_{key}.json (git-ignored)"
+    },
+    "crowd_snapshot": {
+      "method": "Manifold /v0/bets; probAfter of last non-redemption bet at or before T; T = resolved_at - 30d",
+      "n_valid": 50,
+      "n_missing": 0
+    },
+    "elicitation_results": {
+      "total_input_tokens": 27309,
+      "total_output_tokens": 2116,
+      "total_usd": 0.10321,
+      "n_cache_hits": 150,
+      "n_api_calls": 0,
+      "n_parse_errors": 0,
+      "n_refusals": 0,
+      "per_model": {
+        "claude-haiku-4-5-20251001": {
+          "n_success": 50,
+          "n_parse_errors": 0,
+          "n_refusals": 0
+        },
+        "claude-sonnet-5": {
+          "n_success": 50,
+          "n_parse_errors": 0,
+          "n_refusals": 0
+        },
+        "claude-opus-4-8": {
+          "n_success": 50,
+          "n_parse_errors": 0,
+          "n_refusals": 0
+        }
       }
-    }
+    },
+    "question_content_hashes_sha256_prefix16": {
+      "manifold_Ovujxo8zFnFLVm3em0SJ": "00162dea9be26066",
+      "manifold_8vGJI7oMRD2LXOQvVxCi": "7d43b03baf77f57a",
+      "manifold_2peum1oabsgPdhOieh29": "00b57b1b31fd5e5a",
+      "manifold_wzR1adHzVea1Ll8aDLh4": "ae5d10fc07cc00eb",
+      "manifold_Dmfwo9OYKNOoukaRaVOV": "1fa95109f06d14c8",
+      "manifold_jiJdxVF6QVnndf94VNo2": "873363529dc0ec8b",
+      "manifold_yLnfj3t749hknHviXKyg": "5a2483ed61361ca0",
+      "manifold_2eAtdKsObQdW3cxdgbR8": "a2685bef132aa72f",
+      "manifold_K734rLHSgfiWKkBPN1bB": "052032819b994bb2",
+      "manifold_2EwVg9v5u9E87WWfj39G": "6084fbfe69c8cae9",
+      "manifold_NNQzMilcYjvCp9k57oGH": "cd03e1aef03c62fc",
+      "manifold_MPyo6PCDrdqMtxMIecoi": "2fcf23ad4b197272",
+      "manifold_u5ve0CXwIYg8hb1vLllv": "add4776db541bcaf",
+      "manifold_Lg3p94BIaroWP5A0c0Sf": "ac817ec37bfbbaf1",
+      "manifold_AanU6xOmNF63vNGyPYcJ": "bcb2fe3af42bf49a",
+      "manifold_x0aaiwo2AMAeSBwgUfVS": "d3b5d61e74bdaf3a",
+      "manifold_sSzfoH4YzmmJE1cazdOD": "402a260ad745e286",
+      "manifold_S3BQDyPC3vlC9z8LR7Jd": "4ec38d7bcc59ef8d",
+      "manifold_LtdlOAyh99": "e233983a8a4dc75b",
+      "manifold_oz3XH73zP2fcn03XJdT4": "d4e21cb4a8714809",
+      "manifold_9YqeGfxWplvVlgRfCZoY": "7fd4447cf41b9bcf",
+      "manifold_2OE9zE2zgg": "02025874a65aa30c",
+      "manifold_hA6DXZpzRPJj4bylkgbd": "a6f5524b19edb46d",
+      "manifold_hLdeaGnag82je9kUXNCN": "25498aecbb08fa04",
+      "manifold_8ZC8ZEu69u": "c56a655d5fb002ad",
+      "manifold_6LugOh96qn": "296400c882effe12",
+      "manifold_CEO86Up8ug": "65368ecc77664c7c",
+      "manifold_8Z0fOfsZzyfoXBSJrYP5": "f79a9972032abadd",
+      "manifold_6Q4TYiAHzI5WTk4fMw4S": "f747b780f12711cd",
+      "manifold_CuIdh69ISn": "c29ad47278ccabf0",
+      "manifold_lljkjnwz0k": "2dddd15d4605abce",
+      "manifold_vsIAimQ4EfottF1WxtGz": "b7c0ed092df6dd9d",
+      "manifold_22Cl9qdsR0": "5766d7968bbe7712",
+      "manifold_AnE2tOSc58": "6fa4ac6655c2156f",
+      "manifold_D60NcsR00cMTRIV62S8N": "cb32bf375cf5bb61",
+      "manifold_1m08c366fh": "8955b8d7e8b1001e",
+      "manifold_Rzyh6Pth0n": "61195221f7629577",
+      "manifold_HCUhdnS4lsZXZFVBsvtK": "1a56a120582b6592",
+      "manifold_h6c9pLZh0z": "0b633947f40d3aad",
+      "manifold_Y1YDkx1SzzL93AFDpG6v": "06e5cc74beed697c",
+      "manifold_8E6duupq0N": "daf329a8fc048603",
+      "manifold_0vfCTCfht3mB2XgEsrxz": "7eb56ad8823029ec",
+      "manifold_pM6Xx8AdGWZfTdysrIjv": "8cf353b9bf8280b5",
+      "manifold_kzsjRwaVxDCms1UEQ0nv": "7988e57c056ae252",
+      "manifold_eithThMNGm1lATYq6f54": "9a4a90326e9ba21a",
+      "manifold_EEcggZCt2y": "d03e47ec6d0d5154",
+      "manifold_p26CzQ8UUq": "cf7e97746d11be43",
+      "manifold_dP58EZ5ntQ": "6212c257cff1f71d",
+      "manifold_n9PuOSdzCl": "6d247da8804cf628",
+      "manifold_8AgQsR2h5I": "f255a603bd14eeb7"
+    },
+    "auth": "keys loaded from .env only; never written to this file or any tracked file",
+    "artifact": "/Users/bozte/Desktop/antrophic_fellow_project/forecasting-ai-progress/data/interim/mvp_forecasts.csv"
   },
-  "question_content_hashes_sha256_prefix16": {
-    "manifold_Ovujxo8zFnFLVm3em0SJ": "00162dea9be26066",
-    "manifold_8vGJI7oMRD2LXOQvVxCi": "7d43b03baf77f57a",
-    "manifold_2peum1oabsgPdhOieh29": "00b57b1b31fd5e5a",
-    "manifold_wzR1adHzVea1Ll8aDLh4": "ae5d10fc07cc00eb",
-    "manifold_Dmfwo9OYKNOoukaRaVOV": "1fa95109f06d14c8",
-    "manifold_jiJdxVF6QVnndf94VNo2": "873363529dc0ec8b",
-    "manifold_yLnfj3t749hknHviXKyg": "5a2483ed61361ca0",
-    "manifold_2eAtdKsObQdW3cxdgbR8": "a2685bef132aa72f",
-    "manifold_K734rLHSgfiWKkBPN1bB": "052032819b994bb2",
-    "manifold_2EwVg9v5u9E87WWfj39G": "6084fbfe69c8cae9",
-    "manifold_NNQzMilcYjvCp9k57oGH": "cd03e1aef03c62fc",
-    "manifold_MPyo6PCDrdqMtxMIecoi": "2fcf23ad4b197272",
-    "manifold_u5ve0CXwIYg8hb1vLllv": "add4776db541bcaf",
-    "manifold_Lg3p94BIaroWP5A0c0Sf": "ac817ec37bfbbaf1",
-    "manifold_AanU6xOmNF63vNGyPYcJ": "bcb2fe3af42bf49a",
-    "manifold_x0aaiwo2AMAeSBwgUfVS": "d3b5d61e74bdaf3a",
-    "manifold_sSzfoH4YzmmJE1cazdOD": "402a260ad745e286",
-    "manifold_S3BQDyPC3vlC9z8LR7Jd": "4ec38d7bcc59ef8d",
-    "manifold_LtdlOAyh99": "e233983a8a4dc75b",
-    "manifold_oz3XH73zP2fcn03XJdT4": "d4e21cb4a8714809",
-    "manifold_9YqeGfxWplvVlgRfCZoY": "7fd4447cf41b9bcf",
-    "manifold_2OE9zE2zgg": "02025874a65aa30c",
-    "manifold_hA6DXZpzRPJj4bylkgbd": "a6f5524b19edb46d",
-    "manifold_hLdeaGnag82je9kUXNCN": "25498aecbb08fa04",
-    "manifold_8ZC8ZEu69u": "c56a655d5fb002ad",
-    "manifold_6LugOh96qn": "296400c882effe12",
-    "manifold_CEO86Up8ug": "65368ecc77664c7c",
-    "manifold_8Z0fOfsZzyfoXBSJrYP5": "f79a9972032abadd",
-    "manifold_6Q4TYiAHzI5WTk4fMw4S": "f747b780f12711cd",
-    "manifold_CuIdh69ISn": "c29ad47278ccabf0",
-    "manifold_lljkjnwz0k": "2dddd15d4605abce",
-    "manifold_vsIAimQ4EfottF1WxtGz": "b7c0ed092df6dd9d",
-    "manifold_22Cl9qdsR0": "5766d7968bbe7712",
-    "manifold_AnE2tOSc58": "6fa4ac6655c2156f",
-    "manifold_D60NcsR00cMTRIV62S8N": "cb32bf375cf5bb61",
-    "manifold_1m08c366fh": "8955b8d7e8b1001e",
-    "manifold_Rzyh6Pth0n": "61195221f7629577",
-    "manifold_HCUhdnS4lsZXZFVBsvtK": "1a56a120582b6592",
-    "manifold_h6c9pLZh0z": "0b633947f40d3aad",
-    "manifold_Y1YDkx1SzzL93AFDpG6v": "06e5cc74beed697c",
-    "manifold_8E6duupq0N": "daf329a8fc048603",
-    "manifold_0vfCTCfht3mB2XgEsrxz": "7eb56ad8823029ec",
-    "manifold_pM6Xx8AdGWZfTdysrIjv": "8cf353b9bf8280b5",
-    "manifold_kzsjRwaVxDCms1UEQ0nv": "7988e57c056ae252",
-    "manifold_eithThMNGm1lATYq6f54": "9a4a90326e9ba21a",
-    "manifold_EEcggZCt2y": "d03e47ec6d0d5154",
-    "manifold_p26CzQ8UUq": "cf7e97746d11be43",
-    "manifold_dP58EZ5ntQ": "6212c257cff1f71d",
-    "manifold_n9PuOSdzCl": "6d247da8804cf628",
-    "manifold_8AgQsR2h5I": "f255a603bd14eeb7"
-  },
-  "auth": "keys loaded from .env only; never written to this file or any tracked file",
-  "artifact": "/Users/bozte/Desktop/antrophic_fellow_project/forecasting-ai-progress/data/interim/mvp_forecasts.csv"
-}
+  {
+    "run_id": "mvp-thin-slice-v2-2026-07-16",
+    "run_start_utc": "2026-07-16T12:23:38.659360+00:00",
+    "manifest_written_utc": "2026-07-16T12:36:24.645709+00:00",
+    "random_seed": 42,
+    "d012_decision": "docs/DECISIONS.md#D-012",
+    "source": "manifold",
+    "n_questions": 50,
+    "panel_models": [
+      "claude-haiku-4-5-20251001",
+      "claude-sonnet-5",
+      "claude-opus-4-8"
+    ],
+    "training_cutoffs": {
+      "claude-haiku-4-5-20251001": "2025-07-31",
+      "claude-sonnet-5": "2026-01-31",
+      "claude-opus-4-8": "2026-01-31"
+    },
+    "elicitation_protocol": {
+      "version": "v2",
+      "system_prompt_sha256": "16108381d2bc51cac829a0e7177a5bbaec7003c052c2ea25c4ef1cc2e7c3fb0a",
+      "max_tokens": 1000,
+      "temperature": {
+        "claude-haiku-4-5-20251001": 0,
+        "claude-sonnet-5": "omitted",
+        "claude-opus-4-8": "omitted"
+      },
+      "thinking": "omitted for all models",
+      "prob_range": [
+        0.01,
+        0.99
+      ],
+      "cache_key_scheme": "sha256(qid|model|v2|seed)[:32]; files at data/llm_cache/mvp_v2_{model}_{key}.json (git-ignored)"
+    },
+    "crowd_snapshot": {
+      "method": "reused from v1 (mvp_crowd_probs.json); no re-fetch",
+      "n_valid": 50,
+      "n_missing": 0
+    },
+    "elicitation_results": {
+      "total_input_tokens": 36859,
+      "total_output_tokens": 20032,
+      "total_usd": 0.3455,
+      "n_cache_hits": 0,
+      "n_api_calls": 150,
+      "n_parse_errors": 0,
+      "n_refusals": 0,
+      "per_model": {
+        "claude-haiku-4-5-20251001": {
+          "n_success": 50,
+          "n_parse_errors": 0,
+          "n_refusals": 0
+        },
+        "claude-sonnet-5": {
+          "n_success": 50,
+          "n_parse_errors": 0,
+          "n_refusals": 0
+        },
+        "claude-opus-4-8": {
+          "n_success": 50,
+          "n_parse_errors": 0,
+          "n_refusals": 0
+        }
+      }
+    },
+    "artifact": "/Users/bozte/Desktop/antrophic_fellow_project/forecasting-ai-progress/data/interim/mvp_forecasts_v2.csv",
+    "auth": "keys loaded from .env only; never written to this file"
+  }
+]
