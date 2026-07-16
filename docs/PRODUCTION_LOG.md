@@ -26,6 +26,37 @@ Blockers: <none | ...>
 
 ---
 
+### 2026-07-16 — Recon v1.1: Metaculus with token + empirical pilot ρ — Phase 0
+Done: Human provisioned `.env` (METACULUS_API_TOKEN, ANTHROPIC_API_KEY). data-engineer re-run:
+(1) Metaculus pulled with auth via `/api/posts/` — 142 AI-progress binary questions found, but
+`question.resolution` is null for ALL of them (API limitation as of 2026-07-16) → countable, not
+analyzable; (2) pilot elicitation completed (30 seeded questions × 2 models, crowd prob at T from
+Manifold bet history); (3) orchestrator-caught fix-ups: manifest restructured to cover all three
+pulls with SHA-256 hashes, and the cutoff table corrected to TRAINING-data cutoffs (end-of-month,
+conservative) instead of "reliable knowledge" cutoffs.
+Findings/decisions: **Empirical ρ̂ = 0.57** pooled (haiku-4.5: 0.49 [0.16, 0.72]; sonnet-5: 0.66
+[0.39, 0.82], logit-scale, n=30). Under training cutoffs the clean snapshot-feasible N: haiku-4.5
+(C=2025-07-31) → 808 combined (791 Manifold), power ≈100% at ρ̂; Claude-5-family (C=2026-01-31) →
+175 → a standalone shared-question encompassing test at the newest cutoff is UNDERPOWERED (~70-75%);
+RQ3 confirmatory status rides on the haiku-cutoff sample. **RQ3: CONFIRMATORY** per D-008.
+11/30 pilot questions have T < C for sonnet-5 (recency leak) — inflates ρ̂, i.e. conservative for
+the power verdict; those questions are inadmissible in the Phase-2/3 clean sample for Jan-2026
+models (documented in recon report LIMITATIONS §9). Haiku pilot calibration poor (Brier 0.214 vs
+crowd 0.056) — keep but monitor. `temperature` is deprecated on newest Anthropic models (HTTP 400)
+— response caching is the determinism mechanism for them.
+Cost this session: USD 0.054 (run `pilot-elicitation-2026-07-16`; running total USD 0.054).
+Broke / changed: v1.1 initially shipped without updating the manifest (caught at orchestrator
+verification; fixed same day). Cutoff basis corrected from "reliable" to training cutoff — lowers
+clean N (1,125→808; 239→175) but is the defensible reading of D-006.
+Gate status: Phase-0 feasibility — ALL deliverables complete incl. empirical ρ. **PENDING human
+gate decisions**; orchestrator recommends PASS (novelty incremental-but-defensible, N ample,
+RQ3 confirmatory, RQ4 viable, cost negligible).
+Next action: Human decides: (1) Manifold-only v1 (Metaculus → future work)?; (2) panel:
+haiku-4-5 + sonnet-5 + fable-5 (Anthropic-only, two cutoffs) vs. adding OPENAI_API_KEY for an
+older-cutoff model (2-3× clean N, stronger RQ2); (3) training-cutoff constants confirmation.
+Then: log D-011, tick Phase 0 in SCOPE, commit, start Phase 1 thin slice.
+Blockers: awaiting human gate decisions.
+
 ### 2026-07-15 — Phase-0 feasibility: novelty check + data recon complete — Phase 0
 Done: (1) researcher novelty check → `docs/novelty_memo.md`, `docs/references.md`, D-010 appended.
 (2) data-engineer recon → `docs/recon_report.md`, `src/recon/` (re-runnable, seeded),
