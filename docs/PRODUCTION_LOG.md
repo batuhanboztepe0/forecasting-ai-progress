@@ -26,6 +26,35 @@ Blockers: <none | ...>
 
 ---
 
+### 2026-07-17 — Phase 3a: RQ1–RQ3 confirmatory package complete — Phase 3
+Done: quant-analyst ran the D-016 plan exactly (rq_confirmatory.py; results JSON
+SHA-256-stable across runs; 73 unit tests re-verified green by orchestrator). Outputs:
+data/interim/phase3_rq123.json, docs/phase3_results.md, docs/figures/rq3_coef_forest.png.
+Findings/decisions (confirmatory, BH q=0.10 over the 5-test family):
+- **H3a CONFIRMED** (haiku/haiku_clean N=352): b_crowd=+1.181 [0.722, 1.640], p<0.001,
+  BH-rejected — the market carries information beyond the model.
+- **H3b null**: b_model=+0.107 [−0.116, +0.330], p=0.35 — haiku adds no detectable information
+  beyond the market. Together: asymmetric encompassing — crowd encompasses haiku.
+- **H1 null in both confirmatory cells**: crowd CITL=+0.035 [0.017, 0.053] — CI excludes 0
+  (BH-rejected statistically) but |CITL|<0.05, so the pre-registered conjunction FAILS →
+  "well calibrated" not rejected (two-part decision reported explicitly). Haiku CITL=+0.004,
+  p=0.87. Slopes: crowd 1.30 (mildly underconfident), haiku 0.35 (severely overconfident).
+- **H2-haiku not rejected** (marginal): ΔBSS=−0.119 [−0.268, +0.021], p=0.104; but the
+  pre-registered flag fires: haiku post-cutoff BSS=−0.065, CI includes ≤0 (no better than
+  base rate on clean questions).
+- Exploratory (labeled): same encompassing asymmetry for sonnet/opus; large skill drops
+  (ΔBSS −0.33/−0.27); jan2026 CITL anomaly diagnosed as information-recency (stratum base
+  rate 45.8% vs 33.8% overall; crowd tracks it, models anchor low; not time-clustered).
+- Sensitivities (D-014): NO decision flips; one benign sign flip (H1-haiku CITL +0.004→−0.021
+  under (b), both sides of the threshold-null).
+Cost this session: $0 (no API). Running total USD 7.5120.
+Broke / changed: n/a.
+Gate status: Phase-3 gate (red-team) pending — RQ4 preliminary next, then the full-package
+red-team audit.
+Next action: quant-analyst RQ4 preliminary backtest per D-016 §6; then red-team-reviewer full
+Phase-3 audit; then Phase-4.
+Blockers: none.
+
 ### 2026-07-17 — Phase-2 gate PASSED (human sign-off); fable probe skipped; Phase 3 open — Phase 2→3
 Done: Human signed off the Phase-2 gate and decided the optional fable-5 probe: SKIP (future
 work). Logged D-015 (fable skip) and D-016 (Phase-3 analysis plan details fixed before any
