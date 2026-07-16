@@ -395,7 +395,7 @@ def _submit_batch(questions: list, model: str, repeat: int, api_key: str) -> str
         if model in TEMPERATURE_SUPPORTED:
             params["temperature"] = 0
         requests_payload.append({
-            "custom_id": f"{qid}||repeat={repeat}",
+            "custom_id": f"{qid}__r{repeat}",
             "params":    params,
         })
 
@@ -415,11 +415,31 @@ def _submit_batch(questions: list, model: str, repeat: int, api_key: str) -> str
 
 
 def _poll_batch(batch_id: str, api_key: str) -> None:
-    """Poll batch until processing_status == 'ended'."""
+    """Poll batch until processing_status == 'ended'.
+
+    Retries up to 5 times on transient network errors (OSError/URLError)
+    with a 30-second backoff before raising.
+    """
+    import urllib.error as _ue
     url = f"{ANTHROPIC_API_BASE}/messages/batches/{batch_id}"
     poll_n = 0
     while True:
-        status = _get_json(url, api_key)
+        net_retries = 0
+        while True:
+            try:
+                status = _get_json(url, api_key)
+                break
+            except (_ue.URLError, OSError) as exc:
+                net_retries += 1
+                if net_retries > 5:
+                    raise RuntimeError(
+                        f"Network unreachable after 5 retries polling {batch_id}"
+                    ) from exc
+                print(
+                    f"  [poll {poll_n}] network error ({exc}); retry {net_retries}/5 in 30s",
+                    flush=True,
+                )
+                time.sleep(30)
         ps = status.get("processing_status", "unknown")
         counts = status.get("request_counts", {})
         print(
@@ -589,7 +609,7 @@ def run_one_batch(
 
     for entry in raw_results:
         custom_id = entry.get("custom_id", "")
-        qid = custom_id.split("||")[0]  # strip "||repeat=N" suffix
+        qid = custom_id.rsplit("__r", 1)[0]  # strip "__rN" repeat suffix
         result = entry.get("result", {})
         rtype = result.get("type", "unknown")
 

@@ -1,6 +1,6 @@
 {
   "manifest_version": "2.0",
-  "generated_utc": "2026-07-16T14:27:40.530209+00:00",
+  "generated_utc": "2026-07-16T21:10:53.234743+00:00",
   "phase": "2",
   "random_seed": 42,
   "classifier": {
@@ -1301,5 +1301,69 @@
     },
     "all_records_close_before_haiku_cutoff": 800,
     "all_records_close_before_jan2026_cutoff": 1103
+  },
+  "step_b_elicitation": {
+    "protocol_version": "v2",
+    "system_prompt_hash": "16108381d2bc51cac829a0e7177a5bbaec7003c052c2ea25c4ef1cc2e7c3fb0a",
+    "n_questions": 1187,
+    "panel_models": [
+      "claude-haiku-4-5-20251001",
+      "claude-sonnet-5",
+      "claude-opus-4-8"
+    ],
+    "batch_ids": {
+      "claude-opus-4-8|r0": "msgbatch_01EnEkgLzp2wcrJvdvwkDqZQ",
+      "claude-sonnet-5|r1": "msgbatch_01KJsxHKXZNuqQHJDFJAttpB",
+      "claude-sonnet-5|r2": "msgbatch_01LN1qwcEc6EgAVQmBnEKc33",
+      "claude-haiku-4-5-20251001|r0": "msgbatch_017BbdWg9b34XoRQNDLPy1Mm",
+      "claude-sonnet-5|r0": "msgbatch_01EQVACnaC3RbRz9pp5AkJsT"
+    },
+    "timestamp_utc": "2026-07-16T21:10:53.234731+00:00",
+    "main_run": {
+      "n_questions": 1187,
+      "total_input_tokens": 306514,
+      "total_output_tokens": 117965,
+      "total_cost_usd": 2.2408475,
+      "per_model": {
+        "claude-haiku-4-5-20251001": {
+          "n_new": 0,
+          "n_cache": 1187,
+          "n_parse_err": 0,
+          "cost_usd": 0.0
+        },
+        "claude-sonnet-5": {
+          "n_new": 0,
+          "n_cache": 1187,
+          "n_parse_err": 0,
+          "cost_usd": 0.0
+        },
+        "claude-opus-4-8": {
+          "n_new": 1160,
+          "n_cache": 27,
+          "n_parse_err": 0,
+          "cost_usd": 2.2408475
+        }
+      }
+    },
+    "variance_probe": {
+      "n_questions": 100,
+      "model": "claude-sonnet-5",
+      "repeats": [
+        1,
+        2
+      ],
+      "seed": 42,
+      "n_new": 200,
+      "n_parse_err": 0,
+      "cost_usd": 0.230127
+    },
+    "artifacts": {
+      "phase2_forecasts_csv": {
+        "path": "data/interim/phase2_forecasts.csv",
+        "n_rows": 3761,
+        "sha256_text": "58b1e7de1559764b056a078ea8a867af14b367c3a8cb4ea234a5e4e3d573bae3",
+        "determinism": "PASS — rebuild from cache bit-identical"
+      }
+    }
   }
 }

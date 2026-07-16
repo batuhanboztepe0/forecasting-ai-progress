@@ -26,6 +26,37 @@ Blockers: <none | ...>
 
 ---
 
+### 2026-07-17 — Step B COMPLETE + Phase-2 scoring; gate deliverables done, PENDING sign-off — Phase 2
+Done: Human raised the console monthly limit to $30. Opus r0 batch (1,160 new + 27 cache) and
+the variance probe (sonnet-5, 100 q × repeats 1+2) completed: full panel now 3,761 forecasts,
+0 parse errors, 0 refusals across all five batches; determinism PASS (CSV rebuild from cache
+bit-identical, SHA-256 58b1e7de…); manifest step_b block has all 5 batch IDs + prompt hash.
+quant-analyst scored everything descriptively (score_phase2.py; 7/7 sanity gates incl.
+flag-vs-recompute cross-check with 0 mismatches; 73 unit tests re-run green; scores CSV
+SHA-256-identical across runs) → data/interim/phase2_scores.csv,
+docs/figures/phase2_calibration.png, docs/phase2_results.md.
+Findings/decisions (DESCRIPTIVE — confirmatory tests are Phase 3): Crowd Brier 0.1015
+(BSS +0.546) overall, n=1,187. Models overall: sonnet-5 0.1596 (+0.287), opus-4-8 0.1671
+(+0.253), haiku 0.2191 (+0.021). On each model's OWN post-cutoff clean sample no model beats
+base rate (BSS: haiku −0.065 n=352; sonnet −0.025, opus −0.003 n=72 exploratory) — direction
+consistent with H2, untested as yet. All models overconfident on logit scale (cal-slope
+0.35–0.60); crowd mildly underconfident (1.30). Variance probe: mean per-question SD 0.042,
+repeat Brier spread ~0.015 — sampling noise small vs model-crowd gap; one outlier (SD 0.458)
+to inspect. Distinct probs: haiku 39, sonnet 47, opus 45 / 1,187 — discretized but far less
+degenerate than v1. ANOMALY for Phase-3 red-team: models' CITL on jan2026_clean is −13 to
+−18 pp (systematic under-prediction of YES on that small subset).
+Cost this session: opus $2.2408 + probe $0.2301. Running total USD 7.5120 (envelope $8–15).
+Broke / changed: opus batch took 4h52m to flip to ended (vs 49m haiku, 3m sonnet) — load
+artifact, no data issue. EXPERIMENTS run-registry rows for step B re-organized per-model by
+data-engineer.
+Gate status: Phase-2 gate — BOTH criteria MET and orchestrator-verified: (1) metrics pass
+known-input unit tests (73/73, verified twice); (2) provenance recorded (file-byte SHA-256
+manifest verified on disk, 5 batch IDs, raw JSONL, ledger current). **PENDING human sign-off.**
+Next action: human sign-off on Phase-2 gate → Phase 3 (RQ1–RQ4 confirmatory analyses per
+SCOPE §2 with pre-registered thresholds + BH q=0.10, D-014 sensitivity set, then red-team gate).
+Optional decision that can wait until Phase 3: fable-5 frontier probe (D-011; ~$5–10).
+Blockers: human sign-off.
+
 ### 2026-07-16 — Step B PARTIAL: haiku+sonnet complete; opus blocked by console monthly usage limit — Phase 2
 Done: Credits landed (first block was propagation delay; orchestrator verified with a minimal
 billed call). Step B ran: haiku r0 and sonnet-5 r0 batches completed perfectly — 1160/1160
