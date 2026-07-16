@@ -223,3 +223,44 @@ outcome-driven. Full re-run (not drops-only reclassification) keeps the procedur
 Consequences: +~$0.87 classifier cost; strata Ns change (recorded in EXPERIMENTS/log once
 re-run completes); classifier v1.0 decisions retained for audit; a residual borderline band
 (e.g., governance questions) is documented as excluded BY RULE in the datasheet.
+
+### D-014 — Actual Phase-2 Ns; close-date contamination refinement; pre-registered sensitivity set   (status: accepted; refines D-006, updates D-011 §5)   2026-07-16
+Context: Pre-elicitation red-team audit (2026-07-16) of the v1.1 sample found four issues.
+(1) D-011 declared RQ3 confirmatory citing haiku-clean N≈791; after LLM classification (D-013)
+and snapshot feasibility, the actual haiku-clean N = 390 — the confirmatory label must rest on
+the actual N. (2) 38/390 haiku-clean questions have close_at BEFORE haiku's training cutoff
+(worst gap 549 days): the question window ended pre-cutoff and only the platform's formal
+resolution timestamp is post-cutoff (admin lag), so the outcome was likely knowable in training
+data — D-006's C ≤ T rule keys on resolved_at and does not catch this. (3) 76/390 haiku-clean
+questions have close_at < T, where crowd_prob_at_T equals the market's closing price (no trades
+after close) and the "as of T" prompt vantage postdates the market's close. (4) Elicited text is
+title-only (descriptions were never fetched/stored) — this avoids the post-resolution
+description-edit leakage channel (Manifold's API returns current, editable text) but gives
+models less information than platform forecasters had.
+Decision:
+1. **Clean-sample rule refined (per model):** a question is clean for a model with cutoff C iff
+   resolved_at ≥ C + 30d AND close_at ≥ C. Questions failing the close_at condition move out of
+   that model's clean stratum and are analyzed with the memorization probe, flagged
+   `close_before_cutoff_<model>`. Applied per model cutoff (haiku 2025-07-31; sonnet/opus
+   2026-01-31); actual Ns after flagging are recorded in the manifest and EXPERIMENTS.
+2. **RQ3 status at actual N:** haiku-clean confirmatory N = 352 (390 − 38); power ≈99% at pilot
+   ρ̂ = 0.57 per the recon power sketch (80% threshold ≈ N 200) — CONFIRMATORY label re-affirmed
+   on the actual sample. D-011 §5's N≈791 figure is superseded. Jan-2026 subset remains
+   EXPLORATORY (N = 102 before per-model close_at flagging).
+3. **Pre-registered sensitivity analyses** (Phase 3, reported regardless of outcome):
+   (a) RQ1–RQ3 with vs. without the close_before_cutoff questions; (b) RQ1/RQ3 with vs. without
+   close_at < T questions (crowd snapshot = closing price for those).
+4. **Title-only elicitation retained deliberately** (historical description text is not
+   retrievable; current text is a leakage channel). Documented as a limitation with its
+   direction: the crowd has an information advantage, so model-beats-crowd findings are
+   conservative and crowd-beats-model findings must note the asymmetry.
+5. **Provenance fixes before elicitation:** manifest SHA-256 must hash the file bytes as
+   written; the stale v1.0 `strata` block is removed (strata_v11 authoritative); manifest phase
+   label corrected.
+Reasoning: All refinements are decided before any Phase-2 elicitation results exist, so none can
+be outcome-driven. The close_at ≥ C condition restores D-006's intent (model at worst
+information-disadvantaged vs. the crowd's effective information time, which for a closed market
+ends at close_at, not T).
+Consequences: Smaller confirmatory N (352, still amply powered); probe side gains 38 flagged
+questions (informative for RQ2's memorization contrast); elicitation proceeds over all 1,187
+questions regardless (strata are analysis-time labels), so no re-collection is needed.
