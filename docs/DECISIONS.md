@@ -264,3 +264,50 @@ ends at close_at, not T).
 Consequences: Smaller confirmatory N (352, still amply powered); probe side gains 38 flagged
 questions (informative for RQ2's memorization contrast); elicitation proceeds over all 1,187
 questions regardless (strata are analysis-time labels), so no re-collection is needed.
+
+### D-015 — Fable-5 frontier probe SKIPPED (resolves D-011's optional item)   (status: accepted)   2026-07-17
+Context: D-011 left an optional post-MVP fable-5 probe (~$5–10) contingent on time/budget. The
+Jan-2026-cutoff clean subset shrank to N=72 (D-014 flagging) and is exploratory-labeled; fable-5
+shares that cutoff, so the probe would add a frontier point to an exploratory cell only, at
+$10/$50 per MTok with always-on billed thinking.
+Decision: Skip for v1 (human decision 2026-07-17). Note as future work in the report.
+Reasoning: Weak scientific return (no new cutoff, exploratory-only cell) vs. roughly doubling
+elicitation spend.
+Consequences: Panel stays 3 models / 2 cutoffs; the frontier-capability axis of RQ2 is bounded
+by opus-4-8; explicit future-work item alongside Polymarket and multi-provider panels.
+
+### D-016 — Phase-3 analysis plan details, fixed before confirmatory runs   (status: accepted)   2026-07-17
+Context: SCOPE §2 pre-registers hypotheses, tests, and thresholds but leaves execution details
+open (which sample each forecaster's H1 runs on; how H2's "paired" contrast is computed on
+disjoint pre/post question sets; the exact BH family; the RQ4 strategy). These must be fixed
+BEFORE any confirmatory test is run. Descriptive Phase-2 scores have been seen (unavoidable —
+they validated the pipeline); no hypothesis test has been run and no threshold is being changed.
+Decision:
+1. **RQ1 (H1) samples:** confirmatory calibration claims: crowd on the full N=1,187 sample
+   (crowd cannot be contaminated by model cutoffs) and haiku on its clean N=352. Sonnet/opus
+   calibration on jan2026_clean N=72 is exploratory-labeled. Models on the full sample are
+   descriptive only (memorization caveat). Test per SCOPE: CITL 95% CI (seeded bootstrap)
+   excluding 0 AND |CITL| ≥ 0.05 ⇒ reject "well calibrated"; calibration slope with CI reported.
+2. **RQ2 (H2) contrast:** per model, ΔBSS = BSS_post(clean) − BSS_pre(probe incl. D-014
+   reassignments), two-sample seeded bootstrap CI. Clarification (not a hypothesis change):
+   SCOPE's "paired difference" is impossible verbatim — pre/post are disjoint question sets;
+   the per-model contrast with bootstrap CI is the faithful implementation. Flag any model
+   whose post-cutoff BSS CI includes ≤ 0. Confirmatory for haiku; exploratory for sonnet/opus.
+3. **RQ3 (H3a/H3b):** logistic encompassing regression outcome ~ logit(crowd) + logit(model),
+   per model. Confirmatory: haiku on haiku_clean (N=352). Exploratory: sonnet/opus on
+   jan2026_clean (N=72). Wald CIs + seeded bootstrap check; report the logit-scale
+   crowd–model correlation per cell (identifiability, per D-008).
+4. **BH family (q=0.10):** exactly the five confirmatory tests {H1-crowd, H1-haiku, H2-haiku,
+   H3a-haiku, H3b-haiku}. Exploratory cells are reported with effect sizes + CIs, labeled, and
+   sit outside the family.
+5. **D-014 sensitivities:** all confirmatory results re-run (a) with/without the 38
+   close_before_cutoff_haiku questions, (b) with/without close_at < T questions.
+6. **RQ4 (H4, preliminary):** strategy fixed a priori — at snapshot T, on each haiku-clean
+   question where |p_model − p_market| > 0.05, bet in the model's direction; stake = fixed 1%
+   of bankroll (no Kelly optimization); execution priced through Manifold's CPMM using the
+   stored liquidity/microstructure at T (slippage explicit); P&L realized at resolution;
+   seeded bootstrap CI over questions; a recalibrated variant (Platt, fit out-of-fold) is
+   secondary. Play-money caveat mandatory in all reporting.
+Reasoning: Fixing these now preserves pre-registration integrity; every choice follows either
+SCOPE's text, a prior decision (D-008/D-011/D-014), or the most conservative defensible reading.
+Consequences: Analyses are mechanical from here; deviations require a new decision entry.

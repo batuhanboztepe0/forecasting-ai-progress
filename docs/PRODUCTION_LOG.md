@@ -26,6 +26,21 @@ Blockers: <none | ...>
 
 ---
 
+### 2026-07-17 — Phase-2 gate PASSED (human sign-off); fable probe skipped; Phase 3 open — Phase 2→3
+Done: Human signed off the Phase-2 gate and decided the optional fable-5 probe: SKIP (future
+work). Logged D-015 (fable skip) and D-016 (Phase-3 analysis plan details fixed before any
+confirmatory run: RQ1 sample assignment, RQ2 contrast implementation, RQ3 cells, the exact
+5-test BH family, D-014 sensitivity set, RQ4 strategy spec). SCOPE Phase-2 ticked.
+Findings/decisions: D-015, D-016.
+Cost this session: $0 new. Running total USD 7.5120.
+Broke / changed: n/a.
+Gate status: Phase-2 — **PASSED** (human sign-off 2026-07-17). Phase-3 gate open (red-team
+review must pass before results ship).
+Next action: quant-analyst runs RQ1–RQ3 confirmatory package per D-016 (+ sensitivities), then
+RQ4 preliminary backtest; then red-team-reviewer audits the full Phase-3 package (leakage,
+p-hacking, power, overclaim) before anything ships; then Phase 4 (write-up + release).
+Blockers: none.
+
 ### 2026-07-17 — Step B COMPLETE + Phase-2 scoring; gate deliverables done, PENDING sign-off — Phase 2
 Done: Human raised the console monthly limit to $30. Opus r0 batch (1,160 new + 27 cache) and
 the variance probe (sonnet-5, 100 q × repeats 1+2) completed: full panel now 3,761 forecasts,
