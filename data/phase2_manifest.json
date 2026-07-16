@@ -1,7 +1,7 @@
 {
   "manifest_version": "2.0",
-  "generated_utc": "2026-07-16T14:06:00.785571+00:00",
-  "phase": "2-step-A",
+  "generated_utc": "2026-07-16T14:27:40.530209+00:00",
+  "phase": "2",
   "random_seed": 42,
   "classifier": {
     "version": "v1.0",
@@ -13,20 +13,6 @@
     "cost_usd": 0.8658535,
     "used_batch_api": true,
     "system_hash": "f8384a6a98f504ae7844d5af0cb7af5cb15904ff9adb48b95fe8465a5d760b04"
-  },
-  "strata": {
-    "haiku_clean": {
-      "min_resolved": "2025-08-30",
-      "n": 395
-    },
-    "pre_cutoff_probe": {
-      "max_resolved": "2025-08-30",
-      "n": 800
-    },
-    "jan2026_clean_subset": {
-      "min_resolved": "2026-03-02",
-      "n": 82
-    }
   },
   "snapshots": {
     "lead_days": 30,
@@ -41,8 +27,9 @@
     "phase2_questions_json": {
       "path": "data/interim/phase2_questions.json",
       "n_records": 1187,
-      "sha256": "3199467530a2b9c053b9d28c3b2f416eb66ff9a5f6b6a24431478eb97b813c3e",
-      "classifier_version": "v1.1"
+      "sha256_file_bytes": "0143cbc88a7279ce7ff6db1a3ed784b21a305fbc56ef0d32e885b37b1fddac0f",
+      "classifier_version": "v1.1",
+      "note": "SHA-256 of file bytes as written (indent=2, utf-8)"
     },
     "classifier_audit_sample_json": {
       "path": "data/interim/classifier_audit_sample.json",
@@ -1295,5 +1282,24 @@
       "manifold_tbpBkariGnsF14JmFpit",
       "manifold_wl64oIw9XypJNrDFeFf1"
     ]
+  },
+  "clean_ns_d014": {
+    "haiku_clean_total": 390,
+    "haiku_clean_confirmed_n": 352,
+    "haiku_clean_close_before_cutoff": 38,
+    "haiku_clean_close_before_T": 76,
+    "jan2026_clean_total": 102,
+    "jan2026_clean_confirmed_n": 72,
+    "jan2026_clean_close_before_cutoff": 30,
+    "rq3_status": {
+      "haiku": "CONFIRMATORY (N=352, power≈99% at ρ̂=0.57)",
+      "jan2026": "EXPLORATORY"
+    },
+    "cutoffs": {
+      "haiku": "2025-07-31",
+      "jan2026": "2026-01-31"
+    },
+    "all_records_close_before_haiku_cutoff": 800,
+    "all_records_close_before_jan2026_cutoff": 1103
   }
 }

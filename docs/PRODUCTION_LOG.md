@@ -26,6 +26,33 @@ Blockers: <none | ...>
 
 ---
 
+### 2026-07-16 — Scoring core green (73 tests); D-014 fixes applied; step B BLOCKED on API credits — Phase 2
+Done: (1) quant-analyst delivered the Phase-2 scoring core: src/analysis/scoring.py (Brier, BSS,
+log-loss with explicit clamping, CITL, Newton-IRLS logistic recalibration with no new deps,
+reliability bins, seeded paired-bootstrap CIs) + splits.py (D-014 clean rule, cutoffs imported
+from phase2_config, boundary conventions tested inclusive-≥) + 73 known-input unit tests —
+orchestrator-verified green via `python3.11 -m pytest src/analysis/tests/ -q`. (2) data-engineer
+applied all red-team/D-014 fixes, each verified: manifest SHA-256 now hashes file bytes (matches
+disk), stale v1.0 strata block removed, phase label fixed, D-014 flags on all 1,187 records.
+Actual clean Ns under the refined rule: haiku 352 (38 flagged close-before-cutoff → probe side;
+RQ3 CONFIRMATORY, power ≈99% at ρ̂=0.57), jan-2026 72 (30/102 flagged; EXPLORATORY). (3) Step B
+elicitation script ready (src/phase2/elicit_phase2.py: checkpoint/resume, hard no-leakage
+assertion verified, 27 MVP-v2 cache hits preloaded, determinism check built in; projected cost
+$5.195 batched = $0.62 haiku + $1.25 sonnet + $3.12 opus + $0.21 variance probe — within the
+$25 guardrail).
+Findings/decisions: none new (D-014 executed as specified).
+Cost this session: $0 new (batch submission failed before billing). Running total USD 3.1710.
+Broke / changed: **BLOCKER — Anthropic API credit balance exhausted**: batch submission returned
+HTTP 400 "credit balance is too low". Nothing wrong with the pipeline; purely account credits.
+Gate status: Phase-2 gate — scoring-core criterion (known-input unit tests) MET and verified;
+provenance criterion MET for step A (hashes verified on disk); elicitation pending credits.
+Next action: HUMAN — top up Anthropic API credits. Then resume step B:
+`python3.11 src/phase2/elicit_phase2.py` from repo root (no code changes needed), or tell the
+orchestrator to re-dispatch the data-engineer. After forecasts land: quant-analyst scores
+phase2_forecasts.csv, orchestrator runs the Phase-2 gate check, stop for human sign-off.
+Blockers: Anthropic API credits (user-provided). Projected remaining core spend ≈ $5.20
+(new total ≈ $8.37, within the $8–15 envelope).
+
 ### 2026-07-16 — Phase-2 step A: collection + classifier (v1.0→v1.1 realignment) — Phase 2
 Done: data-engineer built the Phase-2 pipeline (src/phase2/): LLM classifier over the 3,728
 keyword candidates (the handoff's "~5,700" was the dedup-dropped count — reconciled), stratum
