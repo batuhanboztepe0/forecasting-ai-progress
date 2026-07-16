@@ -26,6 +26,28 @@ Blockers: <none | ...>
 
 ---
 
+### 2026-07-16 — Step B PARTIAL: haiku+sonnet complete; opus blocked by console monthly usage limit — Phase 2
+Done: Credits landed (first block was propagation delay; orchestrator verified with a minimal
+billed call). Step B ran: haiku r0 and sonnet-5 r0 batches completed perfectly — 1160/1160
+success each, 0 parse errors, 0 refusals (+27 MVP-v2 cache reuses covering the remaining 27 of
+1,187). Raw JSONL + phase2_v2 cache (2,401 entries) intact. Actual cost haiku $0.5082
+(vs $0.62 projected), sonnet $1.3618 (vs $1.25). Ledger updated.
+Findings/decisions: none scientific. Batch latency asymmetric (haiku ~49 min, sonnet ~3 min) —
+server-load artifact, no data issue.
+Cost this session: +$1.8700. Running total USD 5.0410.
+Broke / changed: **BLOCKER — opus-4-8 batch submission rejected: console MONTHLY USAGE LIMIT
+reached** ("regain access 2026-08-01 00:00 UTC"). This is the account's self-configured monthly
+spend cap, not credits. Because the script runs sequentially, the variance probe (sonnet r1/r2)
+also did not run; phase2_forecasts.csv, determinism SHA-256s, and manifest step_b block deferred
+until the panel is complete.
+Gate status: Phase-2 gate — scoring core criterion MET (73 tests, verified); elicitation 2/3
+models done; gate check waits on opus + probe.
+Next action: HUMAN — raise the monthly usage limit in console.anthropic.com (Settings → Limits /
+Plans & Billing; needs ≈$4 headroom: opus $3.12 + probe $0.21) OR wait for the 2026-08-01 reset.
+Then re-run `python3.11 src/phase2/elicit_phase2.py` (haiku/sonnet skip via cache; only opus +
+probe submit). Then: CSV + determinism + manifest, quant-analyst scoring, gate check, sign-off.
+Blockers: Anthropic console monthly usage limit (user action or 2026-08-01 reset).
+
 ### 2026-07-16 — Scoring core green (73 tests); D-014 fixes applied; step B BLOCKED on API credits — Phase 2
 Done: (1) quant-analyst delivered the Phase-2 scoring core: src/analysis/scoring.py (Brier, BSS,
 log-loss with explicit clamping, CITL, Newton-IRLS logistic recalibration with no new deps,

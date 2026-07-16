@@ -19,6 +19,7 @@ config + seed.
 | mvp-thin-slice-v2-2026-07-16 | 2026-07-16 | 1 | elicitation | src/mvp/elicit_v2.py@HEAD | 42 | haiku-4-5,sonnet-5,opus-4-8 | 50 | data/interim/mvp_forecasts_v2.csv | Phase-1 plumbing check protocol-v2 (D-012); n_cache=0 parse_err=0 refusals=0 |
 | phase2-classifier-2026-07-16 | 2026-07-16 | 2 | llm-classifier | src/phase2/run_step_a.py@HEAD | 42 | claude-haiku-4-5-20251001 | 3728 | data/interim/phase2_questions.json | Phase-2 AI-progress classifier v1.0: keep=1836 drop=1892 |
 | phase2-classifier-v11-2026-07-16 | 2026-07-16 | 2 | llm-classifier | src/phase2/run_v11.py@HEAD | 42 | claude-haiku-4-5-20251001 | 3728 | data/interim/phase2_questions.json | D-013 realignment v1.1: keep=1694 drop=2034 |
+| phase2-elicit-2026-07-16 | 2026-07-16 | 2 | elicitation | src/phase2/elicit_phase2.py@HEAD | 42 | haiku-4-5, sonnet-5 (opus-4-8 + variance probe BLOCKED) | 1160×2 | data/raw/phase2/elicit_batch_*.jsonl + data/llm_cache/phase2_v2/ | Step B PARTIAL: haiku r0 batch msgbatch_017BbdWg9b34XoRQNDLPy1Mm, sonnet r0 batch msgbatch_01EQVACnaC3RbRz9pp5AkJsT, both 1160/1160 success, 0 parse_err, 0 refusals (+27 MVP-v2 cache reuses); opus submission hit console MONTHLY USAGE LIMIT (resets 2026-08-01 UTC unless raised); CSV/determinism/manifest step_b deferred until panel complete |
 | _example_ | 2026-01-01 | 1 | elicitation | configs/mvp.yaml@abc123 | 42 | c-sonnet, gpt-mini | 100 | data/interim/mvp_scores.parquet | dry run |
 
 ## Cost ledger (LLM API)
@@ -39,9 +40,11 @@ Append one row per run that hits the API. Keep the running total current.
 | mvp-thin-slice-v2-2026-07-16 | claude-opus-4-8 | 13,304 | 4,942 | no | no | 0.1901 | 0.5027 |
 | phase2-classifier-2026-07-16 | claude-haiku-4-5-20251001 | 712,437 | 203,854 | yes | no | 0.8659 | 1.3686 |
 | phase2-classifier-v11-2026-07-16 | claude-haiku-4-5-20251001 | 2,412,405 | 238,474 | yes | no | 1.8024 | 3.1710 |
+| phase2-elicit-2026-07-16 | claude-haiku-4-5-20251001 | 236,755 | 155,947 | yes | partial | 0.5082 | 3.6792 |
+| phase2-elicit-2026-07-16 | claude-sonnet-5 | 306,514 | 211,063 | yes | partial | 1.3618 | 5.0410 |
 | _example_ | claude-sonnet | 120,000 | 40,000 | yes | yes | 0.00 | 0.00 |
 
-**Running total: USD 3.1710** &nbsp; (guardrail: escalate if a single run is projected > USD 25;
+**Running total: USD 5.0410** &nbsp; (guardrail: escalate if a single run is projected > USD 25;
 target full study ≲ USD 20–35 — see `SCOPE.md` §6.)
 
 Notes:
