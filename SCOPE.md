@@ -107,7 +107,7 @@ CIs and do not stake the project's value on which way they fall.
 - [x] Phase 0 — feasibility (novelty verdict + data recon) — **blocking** — PASSED 2026-07-16 (D-010, D-011)
 - [x] Phase 1 — MVP end-to-end thin slice — PASSED 2026-07-16 (human sign-off; protocol v2 locked, D-012)
 - [x] Phase 2 — full data + scoring core (tested) — PASSED 2026-07-17 (human sign-off; 1,187 q × 3 models, 0 errors, determinism verified)
-- [ ] Phase 3 — RQ1–RQ4 analyses + red-team
+- [x] Phase 3 — RQ1–RQ4 analyses + red-team — PASSED 2026-07-17 (human sign-off; red-team PASS_WITH_FIXES, fixes applied, results JSONs byte-unchanged)
 - [ ] Phase 4 — write-up + dataset release + reproducibility check
 
 ## 8. Design decisions (resolved; recon-dependent items flagged)

@@ -26,6 +26,21 @@ Blockers: <none | ...>
 
 ---
 
+### 2026-07-17 — Phase-3 gate PASSED (human sign-off); Phase 4 open — Phase 3→4
+Done: Human signed off Phase 3. SCOPE Phase-3 ticked. Human Phase-4 decisions: report =
+English Markdown (paper/report.md), not LaTeX (logged D-017); voice = docs/thesis/
+WRITING_STYLE.md (located; CLAUDE.md's docs/WRITING_STYLE.md path was stale).
+Findings/decisions: D-017.
+Cost this session: $0. Running total USD 7.5120.
+Broke / changed: n/a.
+Gate status: Phase-4 gate open ("a third party could reproduce headline numbers from the repo
+alone"). BLOCKING items: data/release/ dataset + datasheet (red-team MAJOR 6), clean-checkout
+reproduction verified, final red-team pass on the write-up.
+Next action: parallel — data-engineer builds data/release/ (curated dataset + datasheet +
+repro README, CC-BY-4.0, Manifold attribution); scientific-writer drafts paper/report.md per
+WRITING_STYLE. Then: clean-checkout repro check, final red-team pass, README, ship.
+Blockers: none.
+
 ### 2026-07-17 — Phase-3 red-team gate: PASS_WITH_FIXES → fixes applied; gate deliverables complete — Phase 3
 Done: Red-team gate ran as a 16-agent adversarial workflow: 4 independent lenses (leakage/
 contamination, statistical validity, RQ4 market mechanics with live-API+docs verification,

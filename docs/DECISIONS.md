@@ -311,3 +311,14 @@ Decision:
 Reasoning: Fixing these now preserves pre-registration integrity; every choice follows either
 SCOPE's text, a prior decision (D-008/D-011/D-014), or the most conservative defensible reading.
 Consequences: Analyses are mechanical from here; deviations require a new decision entry.
+
+### D-017 — Report format: Markdown instead of LaTeX; voice source located   (status: accepted; amends SCOPE §5)   2026-07-17
+Context: SCOPE §5 lists "paper/ report (LaTeX → PDF)". At Phase-4 kickoff the human chose an
+English Markdown report instead (no LaTeX build dependency; reads directly on GitHub). The
+writing voice source is docs/thesis/WRITING_STYLE.md (not docs/WRITING_STYLE.md as CLAUDE.md
+states; the profile is derived from the human's MSc thesis, which stays local and uncommitted).
+Decision: The v1 report ships as paper/report.md (Markdown, English), written strictly per
+docs/thesis/WRITING_STYLE.md. A LaTeX/PDF version is optional future work.
+Reasoning: Human preference; removes a toolchain dependency from the reproducibility surface.
+Consequences: SCOPE §5's LaTeX line is amended by this decision (SCOPE stays frozen; this entry
+is the record). Figures remain PNG under docs/figures/.
