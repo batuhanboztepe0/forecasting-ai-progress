@@ -108,7 +108,7 @@ CIs and do not stake the project's value on which way they fall.
 - [x] Phase 1 — MVP end-to-end thin slice — PASSED 2026-07-16 (human sign-off; protocol v2 locked, D-012)
 - [x] Phase 2 — full data + scoring core (tested) — PASSED 2026-07-17 (human sign-off; 1,187 q × 3 models, 0 errors, determinism verified)
 - [x] Phase 3 — RQ1–RQ4 analyses + red-team — PASSED 2026-07-17 (human sign-off; red-team PASS_WITH_FIXES, fixes applied, results JSONs byte-unchanged)
-- [ ] Phase 4 — write-up + dataset release + reproducibility check
+- [x] Phase 4 — write-up + dataset release + reproducibility check — PASSED 2026-07-17 (human sign-off delegated + granted; clean-checkout repro verified 73 tests + 28/28 headline numbers)
 
 ## 8. Design decisions (resolved; recon-dependent items flagged)
 

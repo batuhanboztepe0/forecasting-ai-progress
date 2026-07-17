@@ -26,6 +26,19 @@ Blockers: <none | ...>
 
 ---
 
+### 2026-07-17 — SHIPPED: Phase-4 gate signed off; v1 pushed to public GitHub — Phase 4 (done)
+Done: Human reviewed the report and delegated the final ship call to the orchestrator with
+instruction to push on approval. Orchestrator approved (all four gate criteria met and
+empirically verified; final red-team fixes in). SCOPE Phase-4 ticked. Pre-push checks: working
+tree clean, .env untracked, secret scan over tracked files clean. Pushed main to
+github.com/batuhanboztepe0/forecasting-ai-progress.
+Findings/decisions: none new. v1 is complete: 4 phases, 18 decisions (D-001..D-018), USD 7.51
+total API cost, clean-checkout reproduction verified (73 tests + 28/28 headline checks).
+Gate status: ALL GATES PASSED. v1 shipped.
+Next action: future work only (Polymarket real-money RQ4, multi-provider panel, Metaculus if
+resolutions become available, multi-horizon robustness, fable-5 probe).
+Blockers: none.
+
 ### 2026-07-17 — Phase 4 complete: report + release + verified clean-checkout repro; ship pending sign-off — Phase 4
 Done: (1) data-engineer built data/release/ (questions.csv 1,187 rows, forecasts.csv 3,761
 rows, DATASHEET.md, README.md, reference_results.json) + src/analysis/reproduce_from_release.py.
