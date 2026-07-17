@@ -26,6 +26,30 @@ Blockers: <none | ...>
 
 ---
 
+### 2026-07-17 — Post-ship lookahead-bias audit: CLEAN; disclosure polish pushed — Phase 4 (post-ship)
+Done: On the human's request, a final lookahead/temporal-leakage audit ran as a fresh 3-lens
+adversarial workflow (empirical data-temporal integrity, prompt/exposure, design-level), with
+refutation votes armed for any BLOCKER/MAJOR. Verdict: **CLEAN — 0 blockers, 0 majors.**
+Verified empirically: 30-question seeded re-derivation of crowd_prob_at_T from raw bet files
+(no post-T bet influences any snapshot); prompt-construction path interpolates only title +
+T (15 cached prompts scanned, nothing post-T); classifier inputs clean; backtest uses only
+T-time information, Platt out-of-fold; D-014 filter re-verified (N=352). Design-level channels
+judged symmetric or disclosed: retrospective T anchoring (identical for crowd and models),
+resolution-only selection, per-model samples, backtest ordering.
+Findings/decisions: minor disclosure gaps fixed post-publication (transparent correction):
+(1) report body said "76 questions in haiku_clean" with close_at<T — correct value under the
+final D-014 stratum is 38 (152 corpus-wide); fixed in §3.4 and Limitations. (2) Title
+post-resolution edit risk now disclosed (scan of all 1,187 titles: zero genuine leaks).
+(3) Manifold auto-resolve share (609/1,187 close_at==resolved_at) now noted. (4) Selection-on-
+resolution limitation made explicit. (5) Abstract now names the confirmatory cell (haiku,
+N=352) for the headline result. (6) DATASHEET: content_hash formula precise; description-field
+wording corrected ("returned empty", not "not fetched").
+Cost this session: $0 API. Final total USD 7.5120.
+Broke / changed: n/a. Results and JSONs untouched (byte-identical).
+Gate status: all gates passed; post-ship audit CLEAN.
+Next action: none (future work list stands).
+Blockers: none.
+
 ### 2026-07-17 — SHIPPED: Phase-4 gate signed off; v1 pushed to public GitHub — Phase 4 (done)
 Done: Human reviewed the report and delegated the final ship call to the orchestrator with
 instruction to push on approval. Orchestrator approved (all four gate criteria met and

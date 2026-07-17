@@ -7,7 +7,7 @@ July 2026
 
 ## Abstract
 
-Forecasts about AI progress inform governance and investment decisions, yet the comparative quality of prediction-market crowds and large language models on this domain is poorly characterised. This study evaluates three Claude models (haiku-4-5, sonnet-5, opus-4-8) against Manifold Markets crowd probabilities on 1,187 resolved binary AI-progress questions. A snapshot-aware contamination rule (C ≤ T) is applied to close an information-recency leak that the standard post-cutoff filter leaves open. The central finding is asymmetric encompassing: the crowd carries information about outcomes beyond the model's forecast (b_crowd = +1.18, 95% CI [0.94, 1.42], p < 0.001, BH-significant), while the model adds no detectable information beyond the crowd (b_model = +0.11, 95% CI [−0.12, 0.33], p = 0.35). Both calibration hypotheses are null under the pre-registered conjunction rule. The post-cutoff skill drop is consistent with H2 for haiku but the confidence interval includes zero. A friction-aware backtest on Manifold yields a loss (ROI = −43.9%, 95% CI excludes zero). A curated dataset of 1,187 AI-progress questions with crowd snapshots is released alongside this report.
+Forecasts about AI progress inform governance and investment decisions, yet the comparative quality of prediction-market crowds and large language models on this domain is poorly characterised. This study evaluates three Claude models (haiku-4-5, sonnet-5, opus-4-8) against Manifold Markets crowd probabilities on 1,187 resolved binary AI-progress questions. A snapshot-aware contamination rule (C ≤ T) is applied to close an information-recency leak that the standard post-cutoff filter leaves open. The central finding is asymmetric encompassing in the confirmatory cell (claude-haiku-4-5, N = 352): the crowd carries information about outcomes beyond the model's forecast (b_crowd = +1.18, 95% CI [0.94, 1.42], p < 0.001, BH-significant), while the model adds no detectable information beyond the crowd (b_model = +0.11, 95% CI [−0.12, 0.33], p = 0.35). The same pattern appears in exploratory cells for the two stronger models. Both calibration hypotheses are null under the pre-registered conjunction rule. The post-cutoff skill drop is consistent with H2 for haiku but the confidence interval includes zero. A friction-aware backtest on Manifold yields a loss (ROI = −43.9%, 95% CI excludes zero). A curated dataset of 1,187 AI-progress questions with crowd snapshots is released alongside this report.
 
 ---
 
@@ -71,7 +71,7 @@ The jan2026_clean stratum is a subset of haiku_clean (resolved_at >= 2026-03-02 
 
 ### 3.4 Snapshot definition and microstructure
 
-The crowd probability at snapshot T is the `probAfter` value of the last non-redemption bet on the Manifold market at or before T = resolved_at minus 30 days, taken from the bet history. The AMM initial price is not used as a crowd forecast. Liquidity and AMM parameters at T (pool shares, added liquidity, p0) are captured in the microstructure fields. For 76 questions in haiku_clean where close_at < T, no trades occurred after market close. The crowd probability at T for those questions equals the final market price.
+The crowd probability at snapshot T is the `probAfter` value of the last non-redemption bet on the Manifold market at or before T = resolved_at minus 30 days, taken from the bet history. The AMM initial price is not used as a crowd forecast. Liquidity and AMM parameters at T (pool shares, added liquidity, p0) are captured in the microstructure fields. For 38 questions in haiku_clean (152 of all 1,187) where close_at < T, no trades occurred after market close. The crowd probability at T for those questions equals the final market price. A further note on the corpus: 609 of 1,187 questions (51.3%) have close_at equal to resolved_at, Manifold's auto-resolve pattern where the market closes and resolves at the same instant. The snapshot logic handles this correctly (the snapshot predates both); it is noted because auto-resolve markets may trade differently from creator-resolved ones.
 
 ---
 
@@ -216,7 +216,11 @@ Several limitations bound the scope of these findings.
 
 **Classifier residual error.** The v1.1 classifier has an approximately 7.5% drop-side false-negative rate. Wrongly excluded questions shift the question distribution but cannot bias model-vs-crowd comparisons because the classifier does not see resolutions (D-013).
 
-**Crowd snapshot equals closing price for late-close questions.** For 76 questions in haiku_clean where close_at < T, the market closed before the snapshot date. The crowd probability for those questions equals the final market price; the vantage postdates the market's effective close.
+**Crowd snapshot equals closing price for late-close questions.** For 38 questions in haiku_clean (152 of all 1,187) where close_at < T, the market closed before the snapshot date. The crowd probability for those questions equals the final market price; the vantage postdates the market's effective close. The pre-registered sensitivity analysis excluding these questions changes no decision.
+
+**Title edit risk.** Titles were fetched from the live API after resolution, and Manifold allows creators to edit titles at any time. A post-hoc scan of all 1,187 titles for resolution-revealing patterns found zero genuine leaks (the few pattern hits are question-native text). The residual risk is that a subtler edit escaped the scan; it applies equally to the classifier and the elicitation.
+
+**Selection on resolution.** Only questions resolved by the collection date enter the sample. Long-horizon questions still open are excluded by construction. Absolute calibration claims therefore describe the population of resolved questions, not all questions ever asked. The model-vs-crowd comparison is unaffected because both sources face the same selection.
 
 **RQ2 base-rate confound.** The pre-cutoff probe and post-cutoff clean strata have different base rates (0.344 vs. 0.324 for haiku). The BSS reference term differs across strata. ΔBSS is directionally informative but partially confounded.
 

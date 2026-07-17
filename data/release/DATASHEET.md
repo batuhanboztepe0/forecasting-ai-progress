@@ -29,7 +29,7 @@ Each row is a resolved binary prediction-market question. Fields:
 |---|---|---|
 | `qid` | string | Unique question identifier (`manifold_<slug>`) |
 | `source` | string | Data source (`manifold`) |
-| `title` | string | Question title as fetched from the Manifold API |
+| `title` | string | Question title as fetched from the Manifold API (fetched post-resolution; creators can edit titles at any time — a scan of all 1,187 titles for resolution-revealing patterns found zero genuine leaks, but a residual edit risk remains) |
 | `created_at` | ISO-8601 | Market creation timestamp |
 | `close_at` | ISO-8601 | Market close (trading stops) timestamp |
 | `resolved_at` | ISO-8601 | Official resolution timestamp |
@@ -39,7 +39,7 @@ Each row is a resolved binary prediction-market question. Fields:
 | `unique_bettors_at_T` | int | Number of unique bettors with at least one bet before T |
 | `volume_mana_at_T` | int | Cumulative bet volume (Mana) before T |
 | `trade_count_at_T` | int | Number of trades before T |
-| `content_hash` | hex | SHA-256 of `title` (content fingerprint) |
+| `content_hash` | hex | SHA-256 of the title text plus a trailing newline (content fingerprint; recompute as `sha256(title + "\n")`) |
 | `classifier_verdict` | string | LLM classifier v1.1 decision (`keep` = AI-progress question) |
 | `stratum` | string | Analysis stratum (`haiku_clean` or `pre_cutoff_probe`) |
 | `close_before_cutoff_haiku` | int 0/1 | D-014 flag: market closed before haiku training cutoff (2025-07-31) |
@@ -163,8 +163,10 @@ field `step_b_elicitation.system_prompt_hash`).
 Key design choices (no leakage):
 - `outcome` and `resolved_at` are never interpolated into the prompt text (asserted in
   the elicitation script).
-- Title-only: question descriptions were not fetched to avoid the post-resolution
-  description-edit leakage channel (Manifold's API returns current, editable text).
+- Title-only: question description fields returned empty for all collected questions and were
+  not stored or used, which also avoids the post-resolution description-edit leakage channel
+  (Manifold's API returns current, editable text). Note: 609/1,187 questions (51.3%) have
+  close_at equal to resolved_at (Manifold auto-resolve); the snapshot at T predates both.
 - Temperature = default (no override); models seeded deterministically via the Batches API
   cache (same prompt → same cached response).
 
