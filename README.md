@@ -1,7 +1,23 @@
 # Forecasting AI Progress: Are Markets and Models Calibrated?
 
-**Status:** work in progress — v1 pre-registered (RQ1–RQ3 confirmatory core; RQ4 preliminary,
-play-money). Pipeline build in progress; results not yet final.
+**Status:** v1 complete (2026-07-17). All four phase gates passed with human sign-off and
+red-team audit. Report: [`paper/report.md`](paper/report.md). Dataset:
+[`data/release/`](data/release/) (CC-BY-4.0). Total API cost: USD 7.51.
+
+**Headline result (confirmatory, BH q = 0.10, N = 352 post-cutoff questions):** asymmetric
+forecast encompassing. The Manifold crowd carries information about outcomes beyond
+claude-haiku-4-5's forecast (b_crowd = +1.18, 95% CI [0.94, 1.42], p < 1e-15); the model adds
+no detectable information beyond the crowd (b_model = +0.11, 95% CI [−0.12, 0.33], p = 0.35).
+Both pre-registered calibration hypotheses are null. The play-money backtest finds no
+exploitable edge (P&L 95% CI entirely negative). Exploratory cells for sonnet-5 and opus-4-8
+show the same encompassing pattern. Full tables, sensitivity analyses, and limitations are in
+the report.
+
+**Reproduce:** clone the repo, then run
+`python3.11 -m pytest src/analysis/tests/ -q` (73 unit tests) and
+`python3.11 src/analysis/reproduce_from_release.py` (rebuilds all headline numbers from
+`data/release/` and checks them against committed reference values; 28 checks). See
+[`data/release/README.md`](data/release/README.md) for details.
 
 An empirical study of how well **prediction-market crowds** and **large language models**
 forecast **AI progress itself** — benchmark saturation, model releases, capability

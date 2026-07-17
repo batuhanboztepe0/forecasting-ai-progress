@@ -49,6 +49,8 @@ Each row is a resolved binary prediction-market question. Fields:
 **Strata.** `haiku_clean` (N=352): questions where the model is information-disadvantaged
 vs the crowd (resolved_at ≥ cutoff + 30 d AND close_at ≥ cutoff). Confirmatory stratum for
 haiku. `pre_cutoff_probe` (N=835): remaining questions; used in RQ2's memorisation contrast.
+Note: the analysis scripts and `docs/phase3_results.md` refer to this stratum as
+"haiku_probe" — the two names are synonymous (complement of `haiku_clean`, N=835).
 
 ### 2b. Forecasts (`forecasts.csv`, 3,761 rows)
 
@@ -124,9 +126,9 @@ introduces a slight selection bias toward "mainstream" AI topics.
 `crowd_prob_at_T` is the Manifold market probability at T = resolved_at − 30 days, computed
 from the full per-question bet history. Bets placed after T are excluded.
 
-The minimum-activity filter requires at least 1 bet before T. For 76/1,187 questions
-(close_before_T=1), the market closed before T; in these cases `crowd_prob_at_T` equals the
-market's final closing price.
+The minimum-activity filter requires at least 1 bet before T. For 152/1,187 questions
+(close_before_T=1) the market closed before T; in these cases `crowd_prob_at_T` equals the
+market's final closing price (38 in `haiku_clean`, 114 in `pre_cutoff_probe`).
 
 ### 3e. Training-cutoff contamination rules
 

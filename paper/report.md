@@ -65,7 +65,7 @@ The final strata are:
 
 - haiku_clean (training cutoff 2025-07-31): N = 352. Confirmatory for RQ1, RQ2, RQ3.
 - jan2026_clean (training cutoff 2026-01-31, sonnet-5 and opus-4-8): N = 72. Exploratory for all RQs.
-- haiku_probe (memorization probe, complement of haiku_clean): N = 835. Descriptive.
+- haiku_probe (memorization probe, complement of haiku_clean; released as `pre_cutoff_probe` in the dataset): N = 835. Descriptive.
 
 The jan2026_clean stratum is a subset of haiku_clean (resolved_at >= 2026-03-02 implies resolved_at >= 2025-08-30). Thirty-eight questions with close_at before haiku's training cutoff were moved from the haiku_clean candidate set to haiku_probe (D-014); this is why the confirmatory N is 352 rather than the 390 originally identified before that refinement.
 
@@ -137,7 +137,7 @@ See Figure 1 (docs/figures/phase2_calibration.png) for reliability diagrams acro
 
 **EXPLORATORY: Sonnet-5 and opus-4-8 (jan2026_clean, N = 72).** Sonnet-5: ΔBSS = −0.331, 95% CI [−0.649, −0.062], p = 0.028. Post-cutoff BSS CI [−0.335, +0.230] includes ≤ 0. Opus-4-8: ΔBSS = −0.271, 95% CI [−0.579, −0.008], p = 0.060. Post-cutoff BSS CI [−0.301, +0.242] includes ≤ 0. These are exploratory cells outside the BH family.
 
-A caveat applies to ΔBSS: the pre-cutoff probe and post-cutoff clean strata have different base rates (0.341 vs. 0.324 for haiku). The BSS reference term p(1−p) differs across strata. The contrast is directionally informative but partially confounded by the base-rate difference.
+A caveat applies to ΔBSS: the pre-cutoff probe and post-cutoff clean strata have different base rates (0.344 vs. 0.324 for haiku). The BSS reference term p(1−p) differs across strata. The contrast is directionally informative but partially confounded by the base-rate difference.
 
 ### 5.3 RQ3: Information content (H3a / H3b)
 
@@ -178,13 +178,13 @@ The two pre-registered sensitivity analyses are summarised below. No sign flip o
 | H1-crowd CITL | +0.035 | (crowd unchanged by haiku sample shift) | +0.029 |
 | H1-haiku CITL | +0.004 | +0.026 | −0.021 (sign flip) |
 | H1-haiku slope | 0.353 | 0.321 | 0.417 |
-| H2-haiku ΔBSS | −0.119 | −0.176 | −0.074 |
+| H2-haiku ΔBSS | −0.119 | −0.175 | −0.074 |
 | H3a-haiku b_crowd | +1.181 | +1.036 | +1.117 |
 | H3b-haiku b_model | +0.107 | +0.025 | +0.165 |
 
 The H1-haiku CITL sign flip under sensitivity (b) is benign. Both values (+0.004 and −0.021) are well below the 0.05 effect threshold. The H1-haiku decision is unchanged in either direction. No BH-family decision flips under either sensitivity.
 
-### 5.6 RQ4: Friction-aware backtest (H4) — PRELIMINARY
+### 5.6 RQ4: Friction-aware backtest (H4), PRELIMINARY
 
 *Pre-registered decision criterion (D-016 section 6):* the edge survives only if the 95% bootstrap CI excludes ≤ 0 net of costs.
 
@@ -218,7 +218,7 @@ Several limitations bound the scope of these findings.
 
 **Crowd snapshot equals closing price for late-close questions.** For 76 questions in haiku_clean where close_at < T, the market closed before the snapshot date. The crowd probability for those questions equals the final market price; the vantage postdates the market's effective close.
 
-**RQ2 base-rate confound.** The pre-cutoff probe and post-cutoff clean strata have different base rates (0.341 vs. 0.324 for haiku). The BSS reference term differs across strata. ΔBSS is directionally informative but partially confounded.
+**RQ2 base-rate confound.** The pre-cutoff probe and post-cutoff clean strata have different base rates (0.344 vs. 0.324 for haiku). The BSS reference term differs across strata. ΔBSS is directionally informative but partially confounded.
 
 **Logit clamp asymmetry.** Model probabilities are clamped to [0.01, 0.99]; crowd probabilities are unclamped. The asymmetric logit range may attenuate b_model in the encompassing regression.
 
@@ -260,11 +260,11 @@ Alur R., Stadie B.C., Kang D., Chen R., et al. "AIA Forecaster: Technical Report
 
 Zou A., Xiao T., Bhatt R., Toy A., Weller O., Liang R., Emmons S., Hendrycks D. "Forecasting Future World Events with Neural Networks." NeurIPS 2022. arXiv:2206.15474.
 
-Li Z., Wang Y., El Lahib A., Xia Y., Pi X. "Simulated Ignorance Fails: A Systematic Study of LLM Behaviors on Forecasting Problems Before Model Knowledge Cutoff." arXiv:2601.13717, January 2025.
+Li Z., Wang Y., El Lahib A., Xia Y., Pi X. "Simulated Ignorance Fails: A Systematic Study of LLM Behaviors on Forecasting Problems Before Model Knowledge Cutoff." arXiv:2601.13717, January 2026.
 
 Cheng P., Liu J., Long Y. "PolyBench: Benchmarking LLM Forecasting and Trading Capabilities on Live Prediction Market Data." arXiv:2604.14199, April 2026.
 
-Arora A., Malpani R. "PredictionMarketBench: A SWE-bench-Style Framework for Backtesting Trading Agents on Prediction Markets." arXiv:2602.00133, February 2025.
+Arora A., Malpani R. "PredictionMarketBench: A SWE-bench-Style Framework for Backtesting Trading Agents on Prediction Markets." arXiv:2602.00133, January 2026.
 
 Paleka D., Goel S., Geiping J., Tramer F. "Pitfalls in Evaluating Language Model Forecasters." arXiv:2506.00723, May 2025.
 

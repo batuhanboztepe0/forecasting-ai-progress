@@ -57,7 +57,13 @@ def build_questions() -> int:
                 "trade_count_at_T":         ms.get("trade_count_at_T", ""),
                 "content_hash":             q.get("content_hash", ""),
                 "classifier_verdict":       "keep",   # all 1187 passed v1.1 filter
-                "stratum":                  q.get("stratum", ""),
+                # D-014: haiku_clean requires close_at >= haiku_cutoff (close_before_cutoff_haiku=0)
+                "stratum": (
+                    "haiku_clean"
+                    if q.get("stratum") == "haiku_clean"
+                    and not q.get("close_before_cutoff_haiku", False)
+                    else "pre_cutoff_probe"
+                ),
                 "close_before_cutoff_haiku":    int(q.get("close_before_cutoff_haiku", False)),
                 "close_before_cutoff_jan2026":  int(q.get("close_before_cutoff_jan2026", False)),
                 "close_before_T":               int(q.get("close_before_T", False)),

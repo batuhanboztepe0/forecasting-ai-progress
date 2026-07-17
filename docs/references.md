@@ -1,6 +1,6 @@
 # Working Reference List
 
-All citations verified by fetching primary source (abstract page or full text). No memory-only citations. Last updated: 2026-07-15.
+All citations verified by fetching primary source (abstract page or full text). No memory-only citations. Last updated: 2026-07-17.
 
 ---
 
@@ -20,13 +20,13 @@ All citations verified by fetching primary source (abstract page or full text). 
 
 ## Methodologically Relevant (cited in novelty memo or design notes)
 
-**[Li2025]** Li Z., Wang Y., El Lahib A., Xia Y., Pi X. "Simulated Ignorance Fails: A Systematic Study of LLM Behaviors on Forecasting Problems Before Model Knowledge Cutoff." arXiv: 2601.13717, January 2025. https://arxiv.org/abs/2601.13717 — 52% performance gap between truly-ignorant and prompted-ignorant LLMs on 477 questions; shows instruction-based cutoff enforcement is unreliable; validates structural sample-filtering approach (C ≤ T rule).
+**[Li2026]** Li Z., Wang Y., El Lahib A., Xia Y., Pi X. "Simulated Ignorance Fails: A Systematic Study of LLM Behaviors on Forecasting Problems Before Model Knowledge Cutoff." arXiv: 2601.13717, January 2026. https://arxiv.org/abs/2601.13717 — 52% performance gap between truly-ignorant and prompted-ignorant LLMs on 477 questions; shows instruction-based cutoff enforcement is unreliable; validates structural sample-filtering approach (C ≤ T rule).
 
 **[Zhang2026]** Zhang Z., Chen R., Stadie B.C. "All Leaks Count, Some Count More: Interpretable Temporal Contamination Detection and Mitigation in LLM Backtesting." arXiv: 2602.17234, February 2026. https://arxiv.org/abs/2602.17234 — Introduces Shapley-DCLR metric to quantify contaminated reasoning and TimeSPEC architecture; relevant to contamination detection methodology.
 
 **[Cheng2026]** Cheng P., Liu J., Long Y. "PolyBench: Benchmarking LLM Forecasting and Trading Capabilities on Live Prediction Market Data." arXiv: 2604.14199, April 2026. https://arxiv.org/abs/2604.14199 — 38,666 Polymarket binary markets; 7 LLMs evaluated on forecasting + trading (CWR, APY, Sharpe) via order-book simulation; only 2 of 7 achieve positive returns; no domain restriction, no encompassing test.
 
-**[Arora2025]** Arora A., Malpani R. "PredictionMarketBench: A SWE-bench-Style Framework for Backtesting Trading Agents on Prediction Markets." arXiv: 2602.00133, February 2025. https://arxiv.org/abs/2602.00133 — Deterministic limit-order-book replay framework for trading agent evaluation on Kalshi; fee-aware strategies outperform naive agents; relevant to RQ4 friction modeling.
+**[Arora2026]** Arora A., Malpani R. "PredictionMarketBench: A SWE-bench-Style Framework for Backtesting Trading Agents on Prediction Markets." arXiv: 2602.00133, January 2026. https://arxiv.org/abs/2602.00133 — Deterministic limit-order-book replay framework for trading agent evaluation on Kalshi; fee-aware strategies outperform naive agents; relevant to RQ4 friction modeling.
 
 **[Paleka2025]** Paleka D., Goel S., Geiping J., Tramèr F. "Pitfalls in Evaluating Language Model Forecasters." arXiv: 2506.00723, May 2025. https://arxiv.org/abs/2506.00723 — Catalogs temporal leakage forms and extrapolation pitfalls in LLM forecasting evaluation; relevant to methodology review.
 

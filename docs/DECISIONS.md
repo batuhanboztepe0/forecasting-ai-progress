@@ -312,6 +312,28 @@ Reasoning: Fixing these now preserves pre-registration integrity; every choice f
 SCOPE's text, a prior decision (D-008/D-011/D-014), or the most conservative defensible reading.
 Consequences: Analyses are mechanical from here; deviations require a new decision entry.
 
+### D-018 — Citation date corrections: [Li2025] and [Arora2025] year errors fixed   (status: accepted)   2026-07-17
+Context: Red-team audit flagged ID/date inconsistencies on six citations. Researcher agent fetched
+all six live arXiv abstract pages (2026-07-17) and verified title, first author, and v1 submission
+date for each.
+Decision: Two citations carried wrong publication years and were corrected in docs/references.md,
+paper/report.md, and docs/novelty_memo.md. Citation keys renamed accordingly.
+- [Li2025] → [Li2026]: arXiv:2601.13717 was submitted January 2026, not January 2025. The ID
+  (2601 = 2026-01) encoded the correct year; the prose label did not.
+- [Arora2025] → [Arora2026]: arXiv:2602.00133 was submitted January 2026, not February 2025.
+  The ID (2602 = 2026-02) encodes February 2026; the actual v1 date is January 2026 (late-January
+  submission assigned a February processing ID). Both the year and month in the prose were wrong.
+Four citations were CLEAN (IDs exist, titles and first authors match, dates correct):
+- arXiv:2506.00723 (Paleka et al., May 2025): submission was 31 May 2025; ID encodes June 2025
+  (end-of-month submission assigned next-month ID — expected behavior). Cited date is correct.
+- arXiv:2606.00644 (Tian et al., May 2026): same pattern; cited May 2026 is correct.
+- arXiv:2604.14199 (Cheng et al., April 2026): fully consistent.
+- arXiv:2605.03762 (Ma et al., May 2026): fully consistent.
+No hallucinations detected — all six IDs resolve to real papers with matching titles and authors.
+Reasoning: Dates in prose citations must match actual v1 submission dates, not IDs (which can lag
+by up to a month for end-of-month submissions). All corrections are factual, not hypothesis-related.
+Consequences: Any downstream BibTeX or references.bib must apply the same two corrections.
+
 ### D-017 — Report format: Markdown instead of LaTeX; voice source located   (status: accepted; amends SCOPE §5)   2026-07-17
 Context: SCOPE §5 lists "paper/ report (LaTeX → PDF)". At Phase-4 kickoff the human chose an
 English Markdown report instead (no LaTeX build dependency; reads directly on GitHub). The

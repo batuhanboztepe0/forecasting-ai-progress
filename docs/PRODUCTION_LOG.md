@@ -26,6 +26,30 @@ Blockers: <none | ...>
 
 ---
 
+### 2026-07-17 — Phase 4 complete: report + release + verified clean-checkout repro; ship pending sign-off — Phase 4
+Done: (1) data-engineer built data/release/ (questions.csv 1,187 rows, forecasts.csv 3,761
+rows, DATASHEET.md, README.md, reference_results.json) + src/analysis/reproduce_from_release.py.
+(2) scientific-writer drafted paper/report.md (~3,900 words, docs/thesis/WRITING_STYLE.md voice;
+orchestrator placed the file after a Write-permission block and cross-checked the 5 headline
+numbers against the JSONs — all exact). (3) Clean-checkout reproduction VERIFIED by orchestrator:
+fresh git clone → 73/73 unit tests → 28/28 headline numbers reproduced from release data.
+(4) Final pre-ship red-team (scoped to report + release): FIX-FIRST with 2 blockers + 3 majors +
+4 minors — ALL FIXED and re-verified: B-1 release stratum column now applies D-014 (352/835;
+runner re-passed 28/28), B-2 close_before_T count corrected (152 total, stratum-qualified),
+citations verified against live arXiv (6/6 exist, no hallucinations; 2 year errors fixed,
+D-018), probe base rate 0.341→0.344, sensitivity rounding −0.176→−0.175, stratum-name synonym
+noted, em-dashes 0. README updated with status/results/reproduce. temp/ (runner output)
+gitignored. Process note: orchestrator's post-clone verification commands briefly ran inside
+the scratch clone (persistent Bash cwd); caught and re-run in the real repo — no state damage.
+Findings/decisions: D-018 (citation corrections).
+Cost this session: $0 API. Running total USD 7.5120 (final; under the $8–15 envelope).
+Broke / changed: n/a.
+Gate status: Phase-4 gate ("a third party could reproduce headline numbers from the repo
+alone") — MET and empirically verified. **PENDING human ship sign-off.**
+Next action: human sign-off → tick Phase 4 in SCOPE → (optional, human decision) create the
+public GitHub remote and push.
+Blockers: human sign-off.
+
 ### 2026-07-17 — Phase-3 gate PASSED (human sign-off); Phase 4 open — Phase 3→4
 Done: Human signed off Phase 3. SCOPE Phase-3 ticked. Human Phase-4 decisions: report =
 English Markdown (paper/report.md), not LaTeX (logged D-017); voice = docs/thesis/
