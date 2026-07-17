@@ -1,0 +1,42 @@
+{
+  "_description": "Reference values for reproduce_from_release.py. All generated with seeds fixed per D-016; re-runs must be bit-identical (tolerance 1e-6 on floats).",
+  "tolerance": 1e-06,
+  "rq1": {
+    "crowd_citl": 0.034616715005224674,
+    "crowd_citl_lo": 0.01690735934144738,
+    "crowd_citl_hi": 0.052602204914544926,
+    "crowd_citl_p": 0.0003,
+    "crowd_decision": "FAIL-CITL-THRESHOLD (CI excludes 0 but |CITL|<0.05)",
+    "haiku_citl": 0.0044318181818187585,
+    "haiku_citl_lo": -0.04505681818181784,
+    "haiku_citl_hi": 0.054687500000000555,
+    "haiku_citl_p": 0.8672,
+    "haiku_decision": "FAIL-TO-REJECT (CI includes 0)"
+  },
+  "rq2": {
+    "haiku_delta_bss": -0.11939818411815728,
+    "haiku_delta_lo": -0.26844308279077145,
+    "haiku_delta_hi": 0.021422975212167295,
+    "haiku_delta_p": 0.1043
+  },
+  "rq3": {
+    "haiku_b_crowd": 1.1807480578337421,
+    "haiku_b_model": 0.10697047210576871,
+    "haiku_p_crowd": 0.0,
+    "haiku_p_model": 0.350052305307059
+  },
+  "bh": {
+    "H1-crowd": true,
+    "H1-haiku": false,
+    "H2-haiku": false,
+    "H3a-haiku": true,
+    "H3b-haiku": false
+  },
+  "rq4": {
+    "haiku_clean_main_pnl": -1199.0468,
+    "haiku_clean_main_ci_lo": -1648.6591,
+    "haiku_clean_main_ci_hi": -709.78,
+    "haiku_clean_main_decision": "NO-EDGE",
+    "haiku_clean_platt_pnl": -1762.4968
+  }
+}
